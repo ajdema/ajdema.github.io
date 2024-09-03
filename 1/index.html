@@ -75,7 +75,7 @@
           The basic approach involves exhaustively trying alignments in the
           range of [-15, 15] and taking the alignment with the best score. The
           score can be calculated using L2 norm or Normalized Cross-Correlation
-          (NCC).
+          (NCC). You can see from the below images that I found L2 norm to give better results. 
         </p>
       </section>
       <section class="image-section">
@@ -83,18 +83,31 @@
         <div class="image-card">
           <img
             src="1/media/tobolsk_L2_norm.jpg"
-            alt="Tobolsk, green offset:  (-2, -3)
-          red offset:  (-3, -6)"
+            alt="Tobolsk, green offset:  (-2, -3), red offset:  (-3, -6)"
           />
           <p>Description of Image 1</p>
         </div>
         <div class="image-card">
-          <img src="path/to/your/image2.jpg" alt="Description of Image 2" />
+          <img
+            src="1/media/cathedral_L2_norm.jpg"
+            alt="Cathedral, green offset:  (1, -1), red offset:  (1, -7)"
+          />
           <p>Description of Image 2</p>
         </div>
         <div class="image-card">
-          <img src="path/to/your/image3.jpg" alt="Description of Image 3" />
+          <img
+            src="1/media/monastery_L2_norm.jpg"
+            alt="Monastery, green offset:  (0, 6), red offset:  (-1, -9)"
+          />
           <p>Description of Image 3</p>
+        </div>
+        </div>
+        <div class="image-card">
+        <img
+            src="1/media/monaster_ncc.jpg"
+            alt="Monastery, green offset:  (13, -15), red offset:  (12, -15)"
+        />
+        <p>Description of Image 3</p>
         </div>
       </section>
       <section>
