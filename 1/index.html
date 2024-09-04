@@ -51,6 +51,30 @@
       .image-card p {
         margin-top: 10px;
       }
+      .two-column {
+        display: flex;
+        flex-wrap: wrap; /* Ensures responsiveness */
+        gap: 20px; /* Adds some space between the columns */
+        margin-top: 20px;
+      }
+
+      .text-column {
+        flex: 1;
+        min-width: 200px;
+      }
+
+      .image-column {
+        flex: 1;
+        min-width: 200px;
+        text-align: center;
+      }
+
+      .image-column img {
+        max-width: 100%;
+        height: auto;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
     </style>
   </head>
   <body>
@@ -101,6 +125,62 @@
             alt="Monastery, green offset:  (0, 6), red offset:  (-1, -9)"
           />
           <p>Monastery L2, green offset: (0, 6), red offset: (-1, -9)</p>
+        </div>
+        <div class="image-card">
+          <img
+            src="media/monaster_ncc_norm.jpg"
+            alt="Monastery, green offset:  (0, 6), red offset:  (-1, -9)"
+          />
+          <p>Monastery NCC, green offset: (0, 6), red offset: (-1, -9)</p>
+        </div>
+      </section>
+      <section class="two-column">
+        <div class="text-column">
+          <h2>Approach with pyramid search</h2>
+          <p>
+            The basic approach works for smaller images, but for larger images
+            such as the .tif images, exhaustive search will take too long. To
+            resolve this, I made use of an image pyramid which represents an
+            image at multiple scales and aligns at each scale going from coarse
+            to fine and updating the estimate along the way.
+          </p>
+        </div>
+        <div class="image-column">
+          <img
+            src="media/image_pyramid_example.png"
+            alt="Pyramid Search Illustration"
+          />
+        </div>
+      </section>
+      <section class="image-section">
+        <h2>Results</h2>
+        <div class="image-card">
+          <img
+            src="media/tobolsk_L2_norm.jpg"
+            alt="Tobolsk, green offset:  (-2, -3), red offset:  (-3, -6)"
+          />
+          <p>Tobolsk, green offset: (-2, -3), red offset: (-3, -6)</p>
+        </div>
+        <div class="image-card">
+          <img
+            src="media/cathedral_L2_norm.jpg"
+            alt="Cathedral, green offset:  (1, -1), red offset:  (1, -7)"
+          />
+          <p>Cathedral L2, green offset: (1, -1), red offset: (1, -7)</p>
+        </div>
+        <div class="image-card">
+          <img
+            src="media/monastery_L2_norm.jpg"
+            alt="Monastery, green offset:  (0, 6), red offset:  (-1, -9)"
+          />
+          <p>Monastery L2, green offset: (0, 6), red offset: (-1, -9)</p>
+        </div>
+        <div class="image-card">
+          <img
+            src="media/monaster_ncc_norm.jpg"
+            alt="Monastery, green offset:  (0, 6), red offset:  (-1, -9)"
+          />
+          <p>Monastery NCC, green offset: (0, 6), red offset: (-1, -9)</p>
         </div>
       </section>
       <section>
