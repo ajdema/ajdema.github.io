@@ -177,6 +177,35 @@
         </div>
       </section>
       <section>
+        <h2>Bells & Whistles</h2>
+        <p>
+          For Bells & Whistles I implemented autocropping and autocontrast. For
+          autocropping I detected the edge/borader of the R, G, and B input
+          images and removed rows with pizels close to 0 or 1. The cropping
+          struggled to identify the dark boarders but was veyr good at removing
+          the light boarders. For autocontrast, I used a simple rescale of pixel
+          intesities making the darkest and lightest pixels in the image zero
+          and one respectively.
+        </p>
+      </section>
+      <section>
+        <h2>Results</h2>
+        <div class="image-card">
+          <img
+            src="media/monastery_L2_norm.jpg"
+            alt="Monastery without cropping or contrast."
+          />
+          <p>Monastery without cropping or contrast.</p>
+        </div>
+        <div class="image-card">
+          <img
+            src="media/monastery_contrast_crop.jpg"
+            alt="Monastery with cropping and contrast."
+          />
+          <p>Monastery with cropping and contrast.</p>
+        </div>
+      </section>
+      <section>
         <h2>Conclusion</h2>
         <p>
           [Summarize the key takeaways from your project, including any
