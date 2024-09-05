@@ -100,7 +100,9 @@
           range of [-15, 15] and taking the alignment with the best score. The
           score can be calculated using L2 norm or Normalized Cross-Correlation
           (NCC). You can see from the below images that I found L2 norm to give
-          better results.
+          better results. I additionally tried using a mutual information
+          function to find alignment. This gave exceptional results but took
+          quite a bit longer.
         </p>
       </section>
       <section class="image-section">
@@ -114,10 +116,12 @@
         </div>
         <div class="image-card">
           <img
-            src="media/cathedral_L2_norm.jpg"
-            alt="Cathedral, green offset:  (1, -1), red offset:  (1, -7)"
+            src="media/monastery_mutual.jpg"
+            alt="Monastery mutual info, green offset:  (-2, 3), red offset:  (-2, -3)"
           />
-          <p>Cathedral L2, green offset: (1, -1), red offset: (1, -7)</p>
+          <p>
+            Monastery mutual info, green offset: (-2, 3), red offset: (-2, -3)
+          </p>
         </div>
         <div class="image-card">
           <img
@@ -128,7 +132,7 @@
         </div>
         <div class="image-card">
           <img
-            src="media/monaster_ncc_norm.jpg"
+            src="media/monaster_ncc.jpg"
             alt="Monastery, green offset:  (0, 6), red offset:  (-1, -9)"
           />
           <p>Monastery NCC, green offset: (0, 6), red offset: (-1, -9)</p>
@@ -150,16 +154,14 @@
             src="media/image_pyramid_example.png"
             alt="Pyramid Search Illustration"
           />
+          <p>Pyramid search visualization</p>
         </div>
       </section>
       <section class="image-section">
         <h2>Results</h2>
         <div class="image-card">
-          <img
-            src="media/tobolsk_L2_norm.jpg"
-            alt="Tobolsk, green offset:  (-2, -3), red offset:  (-3, -6)"
-          />
-          <p>Tobolsk, green offset: (-2, -3), red offset: (-3, -6)</p>
+          <img src="media/emir.tif" alt="Emir.tif" />
+          <p>Emir.tif</p>
         </div>
         <div class="image-card">
           <img
@@ -177,7 +179,7 @@
         </div>
         <div class="image-card">
           <img
-            src="media/monaster_ncc_norm.jpg"
+            src="media/monaster_ncc.jpg"
             alt="Monastery, green offset:  (0, 6), red offset:  (-1, -9)"
           />
           <p>Monastery NCC, green offset: (0, 6), red offset: (-1, -9)</p>
