@@ -127,40 +127,36 @@
           <p>Binarized</p>
         </div>
       </section>
-      <section class="two-column">
-        <div class="text-column">
-          <h2>Approach with pyramid search</h2>
+      <section>
+        <h2>Derivative of Gaussian (DoG) Filter</h2>
           <p>
-            The basic approach works for smaller images, but for larger images
-            such as the .tif images, exhaustive search will take too long. To
-            resolve this, I made use of an image pyramid which represents an
-            image at multiple scales and aligns at each scale going from coarse
-            to fine and updating the estimate along the way.
+            The results with Finite Difference were bit noisy. I used a Guassian
+            filter to get smoother results. For this I take the outer product of
+            a guassian vector to give me a matrix and then convolve this with
+            the original image to create a blurred image. From there I repeated
+            the above process of convolving this with each partial derivative
+            and finding an appropriate threshold.
           </p>
+      </section>
+      <section class="image-section">
+        <div class="image-card">
+          <img src="media/cman_gaus_dx.jpg" alt="dx" />
+          <p>\delta x</p>
         </div>
-        <div class="image-column">
-          <img src="media/cman_conv_dx.jpg" alt="dx" />
-          <p>Pyramid search visualization</p>
+        <div class="image-card">
+          <img src="media/cman_gaus_dy.jpg" alt="dy" />
+          <p>\delta y</p>
         </div>
       </section>
       <section class="image-section">
         <div class="image-card">
-          <img src="media/emir.jpg" alt="Emir.tif" />
-          <p>Emir.tif</p>
+          <img src="media/cman_grad_gaus.jpg" alt="Gradient" />
+          <p>Gradient</p>
         </div>
         <div class="image-card">
-          <img src="media/icon.jpg" alt="Icon.tif" />
-          <p>Icon.tif</p>
+          <img src="media/cman_gaus_binarized.jpg" alt="Binarized" />
+          <p>Binarized</p>
         </div>
-        <div class="image-card">
-          <img src="media/three_generations.jpg" alt="Three_generations.tif" />
-          <p>Three_generations.tif</p>
-        </div>
-        <div class="image-card">
-          <img src="media/onion_church.jpg" alt="Onion_church.tif" />
-          <p>Onion_church.tif</p>
-        </div>
-      </section>
       <section>
         <h2>Bells & Whistles</h2>
         <p>
