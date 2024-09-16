@@ -36,31 +36,26 @@
       p {
         line-height: 1.6;
       }
-      .image-section {
+.image-container {
     display: flex;
-    justify-content: space-between; /* Even spacing between images */
-    gap: 20px; /* Adds space between images */
-    margin-top: 20px;
-    flex-wrap: nowrap; /* Prevents images from wrapping to a new line */
-    width: 100%; /* Ensures the section takes full width of the container */
-    overflow-x: auto; /* Allows horizontal scrolling if images don't fit */
+    flex-direction: row; /* Ensures the images are in a row */
+    justify-content: space-between; /* Adds space between the images */
+    gap: 20px; /* Optional: Adds space between the images */
+    flex-wrap: nowrap; /* Ensures no wrapping of images */
+    width: 100%; /* Ensures the container takes full width */
+    overflow-x: auto; /* Allows horizontal scrolling if the images exceed container width */
 }
 
 .image-card {
+    flex: 1;
     text-align: center;
-    width: calc(100% / 5 - 20px); /* Divide space for 5 images minus the gap */
-    flex-shrink: 0; /* Prevents the image cards from shrinking */
 }
 
 .image-card img {
-    width: 100%;
+    width: 100px; /* Set specific width to control image size */
     height: auto;
     border: 1px solid #ddd;
     border-radius: 5px;
-}
-
-.image-card p {
-    margin-top: 10px;
 }
       .two-column {
         display: flex;
@@ -257,10 +252,6 @@
             <div class="image-container">
                 <div class="image-card">
                     <img src="media/gaussian_apple_0.jpg" alt="Image 1" />
-                    <img src="media/gaussian_apple_1.jpg" alt="Image 2" />
-                    <img src="media/gaussian_apple_2.jpg" alt="Image 3" />
-                    <img src="media/gaussian_apple_3.jpg" alt="Image 4" />
-                    <img src="media/gaussian_apple_4.jpg" alt="Image 5" />
                 </div>
                 <div class="image-card">
                     <img src="media/gaussian_apple_1.jpg" alt="Image 2" />
