@@ -141,11 +141,11 @@
       <section class="image-section">
         <div class="image-card">
           <img src="media/cman_gaus_dx.jpg" alt="dx" />
-          <p>&#8706; x</p>
+          <p>&#8706;x</p>
         </div>
         <div class="image-card">
           <img src="media/cman_gaus_dy.jpg" alt="dy" />
-          <p>&#8706; y</p>
+          <p>&#8706;y</p>
         </div>
       </section>
       <section class="image-section">
@@ -185,7 +185,7 @@
              Furthering on the idea of frequnecies we can create hybrid images. Frequencies in the context of images refer to the rate fo change of pixels. 
              For example, where edges appear in pictures are areas of high frequncy; whereas, areas of smooth transition in color or darkenss would be low frequency. 
              The eye picks up on high frequnecies when it is up close to an image and picks up on lower frequencies further away. Using this, 
-             I've extracted the high and low frequnecy portions of images and aligned them on top of each other giving the result fo "hybrid" images
+             I've extracted the high and low frequnecy portions of images and aligned them on top of each other giving the result fo "hybrid" images.
             </p>
           </section>
           <section class="image-section">
@@ -240,6 +240,106 @@
                 <p>Derek and Nutmeg </p>
             </div>
           </section>
+          <section>
+            <h2>Laplacian and Gaussian Stacks</h2>
+            <p>
+             The next part of this project involves showing various frequnecies of images using Gaussian and Laplacian stacks. To make a Gaussian stack,
+             I repeatedly used a gaussian filter on the image with an increasing sigma value for 5 levels. 
+             To create a laplacians stack you instead take the difference of the result of the current gaussian filter and the previous gaussian filter on the image.
+            </p>
+          </section>
+          <section class="image-section">
+            <h3>Gaussian Stack of Apple</h2>
+            <div class="image-container">
+                <div class="image-card">
+                    <img src="media/gaussian_apple_0.jpg" alt="Image 1" />
+                </div>
+                <div class="image-card">
+                    <img src="media/gaussian_apple_1.jpg" alt="Image 2" />
+                </div>
+                <div class="image-card">
+                    <img src="media/gaussian_apple_2.jpg" alt="Image 3" />
+                </div>
+                <div class="image-card">
+                    <img src="media/gaussian_apple_3.jpg" alt="Image 4" />
+                </div>
+                <div class="image-card">
+                    <img src="media/gaussian_apple_4.jpg" alt="Image 5" />
+                </div>
+                <div class="image-card">
+                    <img src="media/gaussian_apple_5.jpg" alt="Image 6" />
+                </div>
+            </div>
+        </section>
+        <section class="image-section">
+            <h3>Gaussian Stack of Orange</h2>
+            <div class="image-container">
+                <div class="image-card">
+                    <img src="media/laplacian_orange_0.jpg" alt="Image 1" />
+                </div>
+                <div class="image-card">
+                    <img src="media/laplacian_orange_1.jpg" alt="Image 2" />
+                </div>
+                <div class="image-card">
+                    <img src="media/laplacian_orange_2.jpg" alt="Image 3" />
+                </div>
+                <div class="image-card">
+                    <img src="media/laplacian_orange_3.jpg" alt="Image 4" />
+                </div>
+                <div class="image-card">
+                    <img src="media/laplacian_orange_4.jpg" alt="Image 5" />
+                </div>
+                <div class="image-card">
+                    <img src="media/gaussian_orange_5.jpg" alt="Image 6" />
+                </div>
+            </div>
+        </section>
+        <section class="image-section">
+            <h3>Laplacian Stack of Apple</h2>
+            <div class="image-container">
+                <div class="image-card">
+                    <img src="media/laplacian_apple_0.jpg" alt="Image 1" />
+                </div>
+                <div class="image-card">
+                    <img src="media/laplacian_apple_1.jpg" alt="Image 2" />
+                </div>
+                <div class="image-card">
+                    <img src="media/laplacian_apple_2.jpg" alt="Image 3" />
+                </div>
+                <div class="image-card">
+                    <img src="media/laplacian_apple_3.jpg" alt="Image 4" />
+                </div>
+                <div class="image-card">
+                    <img src="media/laplacian_apple_4.jpg" alt="Image 5" />
+                </div>
+                <div class="image-card">
+                    <img src="media/gaussian_orange_5.jpg" alt="Image 6" />
+                </div>
+            </div>
+        </section>
+        <section class="image-section">
+            <h3>Laplacian Stack of Orange</h2>
+            <div class="image-container">
+                <div class="image-card">
+                    <img src="media/gaussian_orange_0.jpg" alt="Image 1" />
+                </div>
+                <div class="image-card">
+                    <img src="media/gaussian_orange_1.jpg" alt="Image 2" />
+                </div>
+                <div class="image-card">
+                    <img src="media/gaussian_orange_2.jpg" alt="Image 3" />
+                </div>
+                <div class="image-card">
+                    <img src="media/gaussian_orange_3.jpg" alt="Image 4" />
+                </div>
+                <div class="image-card">
+                    <img src="media/gaussian_orange_4.jpg" alt="Image 5" />
+                </div>
+                <div class="image-card">
+                    <img src="media/gaussian_orange_5.jpg" alt="Image 6" />
+                </div>
+            </div>
+        </section>
     </div>
   </body>
 </html>
