@@ -38,21 +38,22 @@
       }
       .image-section {
     display: flex;
-    justify-content: space-between; /* Ensures even spacing between images */
-    gap: 10px; /* Adds space between images */
+    justify-content: space-between; /* Even spacing between images */
+    gap: 20px; /* Adds space between images */
     margin-top: 20px;
-    flex-wrap: nowrap; /* Prevent wrapping to keep images in one row */
+    flex-wrap: nowrap; /* Prevents images from wrapping to a new line */
+    width: 100%; /* Ensures the section takes full width of the container */
+    overflow-x: auto; /* Allows horizontal scrolling if images don't fit */
 }
 
 .image-card {
-    flex: 1;
     text-align: center;
-    max-width: 12%; /* Ensures the images fit on a row */
+    width: calc(100% / 5 - 20px); /* Divide space for 5 images minus the gap */
+    flex-shrink: 0; /* Prevents the image cards from shrinking */
 }
 
 .image-card img {
     width: 100%;
-    max-width: 100%; /* Keeps images inside their card size */
     height: auto;
     border: 1px solid #ddd;
     border-radius: 5px;
