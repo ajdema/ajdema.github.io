@@ -37,27 +37,31 @@
         line-height: 1.6;
       }
       .image-section {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        margin-top: 20px;
-      }
-      .image-card {
-        flex: 1;
-        min-width: 200px;
-        max-width: 300px;
-        text-align: center;
-      }
-      .image-card img {
-        width: 100%;
-        max-width: 500px;
-        height: auto;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-      }
-      .image-card p {
-        margin-top: 10px;
-      }
+    display: flex;
+    justify-content: space-between; /* Ensures even spacing between images */
+    gap: 20px; /* Adds some space between images */
+    margin-top: 20px;
+    flex-wrap: nowrap; /* Prevents wrapping unless absolutely necessary */
+    overflow-x: auto; /* Allows horizontal scrolling if the images don't fit */
+}
+
+.image-card {
+    flex: 1;
+    min-width: 150px; /* Adjust based on image size preference */
+    text-align: center;
+}
+
+.image-card img {
+    width: 100%;
+    max-width: 200px; /* Adjust max width to keep images manageable */
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.image-card p {
+    margin-top: 10px;
+}
       .two-column {
         display: flex;
         flex-wrap: wrap; /* Ensures responsiveness */
