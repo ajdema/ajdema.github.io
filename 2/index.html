@@ -36,27 +36,49 @@
       p {
         line-height: 1.6;
       }
-.image-container {
-    display: flex;
-    flex-direction: row; /* Ensures the images are in a row */
-    justify-content: space-between; /* Adds space between the images */
-    gap: 20px; /* Optional: Adds space between the images */
-    flex-wrap: nowrap; /* Ensures no wrapping of images */
-    width: 100%; /* Ensures the container takes full width */
-    overflow-x: auto; /* Allows horizontal scrolling if the images exceed container width */
-}
+      .image-section {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-top: 20px;
+      }
+      .image-card {
+        flex: 1;
+        min-width: 200px;
+        max-width: 300px;
+        text-align: center;
+      }
+      .image-card img {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      .image-card p {
+        margin-top: 10px;
+      }
+      .row-images {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: nowrap;
+        width: 100%;
+        overflow-x: auto;
+        }
 
-.image-card {
-    flex: 1;
-    text-align: center;
-}
+        .row-images .image-card {
+        flex: 1;
+        text-align: center;
+        }
 
-.image-card img {
-    width: 100px; /* Set specific width to control image size */
-    height: auto;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
+        .row-images .image-card img {
+        width: 100px; /* Set smaller width only for these specific images */
+        height: auto;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        }
       .two-column {
         display: flex;
         flex-wrap: wrap; /* Ensures responsiveness */
@@ -249,7 +271,7 @@
           </section>
           <section class="image-section">
             <h3>Gaussian Stack of Apple</h2>
-            <div class="image-container">
+            <div class="row-images">
                 <div class="image-card">
                     <img src="media/gaussian_apple_0.jpg" alt="Image 1" />
                 </div>
@@ -265,14 +287,11 @@
                 <div class="image-card">
                     <img src="media/gaussian_apple_4.jpg" alt="Image 5" />
                 </div>
-                <div class="image-card">
-                    <img src="media/gaussian_apple_5.jpg" alt="Image 6" />
-                </div>
             </div>
         </section>
         <section class="image-section">
             <h3>Gaussian Stack of Orange</h2>
-            <div class="image-container">
+            <div class="row-images">
                 <div class="image-card">
                     <img src="media/laplacian_orange_0.jpg" alt="Image 1" />
                 </div>
@@ -288,14 +307,11 @@
                 <div class="image-card">
                     <img src="media/laplacian_orange_4.jpg" alt="Image 5" />
                 </div>
-                <div class="image-card">
-                    <img src="media/gaussian_orange_5.jpg" alt="Image 6" />
-                </div>
             </div>
         </section>
         <section class="image-section">
             <h3>Laplacian Stack of Apple</h2>
-            <div class="image-container">
+            <div class="row-images">
                 <div class="image-card">
                     <img src="media/laplacian_apple_0.jpg" alt="Image 1" />
                 </div>
@@ -311,14 +327,11 @@
                 <div class="image-card">
                     <img src="media/laplacian_apple_4.jpg" alt="Image 5" />
                 </div>
-                <div class="image-card">
-                    <img src="media/gaussian_orange_5.jpg" alt="Image 6" />
-                </div>
             </div>
         </section>
         <section class="image-section">
             <h3>Laplacian Stack of Orange</h2>
-            <div class="image-container">
+            <div class="row-images">
                 <div class="image-card">
                     <img src="media/gaussian_orange_0.jpg" alt="Image 1" />
                 </div>
@@ -333,9 +346,6 @@
                 </div>
                 <div class="image-card">
                     <img src="media/gaussian_orange_4.jpg" alt="Image 5" />
-                </div>
-                <div class="image-card">
-                    <img src="media/gaussian_orange_5.jpg" alt="Image 6" />
                 </div>
             </div>
         </section>
