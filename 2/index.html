@@ -86,7 +86,7 @@
   </head>
   <body>
     <header>
-      <h1>Computer Vision Project</h1>
+      <h1>Fun with Filters and Frequencies!</h1>
     </header>
     <div class="container">
       <section>
@@ -141,11 +141,11 @@
       <section class="image-section">
         <div class="image-card">
           <img src="media/cman_gaus_dx.jpg" alt="dx" />
-          <p>\delta x</p>
+          <p>&#8706; x</p>
         </div>
         <div class="image-card">
           <img src="media/cman_gaus_dy.jpg" alt="dy" />
-          <p>\delta y</p>
+          <p>&#8706; y</p>
         </div>
       </section>
       <section class="image-section">
@@ -157,34 +157,89 @@
           <img src="media/cman_gaus_binarized.jpg" alt="Binarized" />
           <p>Binarized</p>
         </div>
-      <section>
-        <h2>Bells & Whistles</h2>
-        <p>
-          For Bells & Whistles I implemented autocropping and autocontrast. For
-          autocropping I detected the edge/borader of the R, G, and B input
-          images and removed rows with pizels close to 0 or 1. The cropping
-          struggled to identify the dark boarders but was veyr good at removing
-          the light boarders. For autocontrast, I used a simple rescale of pixel
-          intesities making the darkest and lightest pixels in the image zero
-          and one respectively.
-        </p>
-      </section>
-      <section class="image-section">
-        <div class="image-card">
-          <img
-            src="media/monastery_L2_norm.jpg"
-            alt="Monastery without cropping or contrast."
-          />
-          <p>Monastery without cropping or contrast.</p>
-        </div>
-        <div class="image-card">
-          <img
-            src="media/monastery_contrast_crop.jpg"
-            alt="Monastery with cropping and contrast."
-          />
-          <p>Monastery with cropping and contrast.</p>
-        </div>
-      </section>
+        <section>
+            <h2>Image sharpening</h2>
+            <p>
+              You can sharpen a blurry image by running a filter to retain only the low frequencies of your image. 
+              Then if you subtract these low frequencies form the original image you will be left with only the high frequencies. 
+              If you then add the high frequencies back to the original image, therefore emphasizing them you get a "sharpened" image.
+            </p>
+          </section>
+          <section class="image-section">
+            <div class="image-card">
+              <img src="media/original.jpg" alt="dx" />
+              <p>Original Image</p>
+            </div>
+            <div class="image-card">
+              <img src="media/blurred.jpg" alt="dy" />
+              <p>Blurred Image</p>
+            </div>
+            <div class="image-card">
+                <img src="media/sharpened.jpg" alt="dy" />
+                <p>Sharpened Image</p>
+              </div>
+          </section>
+          <section>
+            <h2>Hybrid Images</h2>
+            <p>
+             Furthering on the idea of frequnecies we can create hybrid images. Frequencies in the context of images refer to the rate fo change of pixels. 
+             For example, where edges appear in pictures are areas of high frequncy; whereas, areas of smooth transition in color or darkenss would be low frequency. 
+             The eye picks up on high frequnecies when it is up close to an image and picks up on lower frequencies further away. Using this, 
+             I've extracted the high and low frequnecy portions of images and aligned them on top of each other giving the result fo "hybrid" images
+            </p>
+          </section>
+          <section class="image-section">
+            <div class="image-card">
+              <img src="media/alexei_efros.jpg" alt="dy" />
+              <p>High Frequency Image (prof. Efros)</p>
+            </div>
+            <div class="image-card">
+                <img src="media/mona_lisa.jpg" alt="dy" />
+                <p>Low Frequnecy Image</p>
+            </div>
+          </section>
+          <section class="image-section">
+            <div class="image-card">
+                <img src="media/alexie_lisa.jpg" alt="dx" />
+                <p>Alexei Lisa? Mona Efros?</p>
+            </div>
+          </section>
+          <section class="image-section">
+            <div class="image-card">
+              <img src="media/mona_fft.jpg" alt="dy" />
+              <p>Frequency Analysis of Mona Lisa</p>
+            </div>
+            <div class="image-card">
+                <img src="media/alexei_fft.jpg" alt="dy" />
+                <p>Frequency Analysis of prof. Efros</p>
+            </div>
+          </section>
+          <section class="image-section">
+            <div class="image-card">
+              <img src="media/filtered_mona_fft.jpg" alt="dy" />
+              <p>Frequency Analysis of filtered Mona Lisa</p>
+            </div>
+            <div class="image-card">
+                <img src="media/filtered_alexie_fft.jpg" alt="dy" />
+                <p>Frequency Analysis of filtered prof. Efros</p>
+            </div>
+          </section>
+          <section class="image-section">
+            <div class="image-card">
+              <img src="media/hybrid_fft.jpg" alt="dy" />
+              <p>Frequency Analysis of Hybrid</p>
+            </div>
+          </section>
+          <section class="image-section">
+            <div class="image-card">
+              <img src="media/albert_spaniel.jpg" alt="dy" />
+              <p>Einstein and Spaniel</p>
+            </div>
+            <div class="image-card">
+                <img src="media/sample.jpg" alt="dy" />
+                <p>Derek and Nutmeg </p>
+            </div>
+          </section>
     </div>
   </body>
 </html>
