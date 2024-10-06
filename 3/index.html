@@ -143,188 +143,45 @@
       <body>
         <img src="media/morph_video_aj_dylan.gif" alt="Morph GIF">
       </body>
-    </section>
-        <section class="image-section">
-            <h3>Gaussian Stack of Orange</h2>
-            <div class="row-images">
-                <div class="image-card">
-                    <img src="media/gaussian_orange_0.jpg" alt="Image 1" />
-                </div>
-                <div class="image-card">
-                    <img src="media/gaussian_orange_1.jpg" alt="Image 2" />
-                </div>
-                <div class="image-card">
-                    <img src="media/gaussian_orange_2.jpg" alt="Image 3" />
-                </div>
-                <div class="image-card">
-                    <img src="media/gaussian_orange_3.jpg" alt="Image 4" />
-                </div>
-                <div class="image-card">
-                    <img src="media/gaussian_orange_4.jpg" alt="Image 5" />
-                </div>
-            </div>
+        <section>
+            <h2>The "Mean face" of a population</h2>
+            <p>
+             For this part I computed the average face of the <a href="https://web.archive.org/web/20210305094647/http://www2.imm.dtu.dk/~aam/datasets/datasets.html">Danes</a> dataset.
+             I then morphed my face into the average face as well as morphed the average face into my face.
+            </p>
         </section>
         <section class="image-section">
-            <h3>Laplacian Stack of Apple</h2>
-            <div class="row-images">
-                <div class="image-card">
-                    <img src="media/laplacian_apple_0.jpg" alt="Image 1" />
-                </div>
-                <div class="image-card">
-                    <img src="media/laplacian_apple_1.jpg" alt="Image 2" />
-                </div>
-                <div class="image-card">
-                    <img src="media/laplacian_apple_2.jpg" alt="Image 3" />
-                </div>
-                <div class="image-card">
-                    <img src="media/laplacian_apple_3.jpg" alt="Image 4" />
-                </div>
-                <div class="image-card">
-                    <img src="media/laplacian_apple_4.jpg" alt="Image 5" />
-                </div>
+            <div class="image-card">
+                <img src="media/mean_pop_face.jpg" alt="Average Face" />
+                <p>Mean population face</p>
             </div>
-        </section>
-        <section class="image-section">
-            <h3>Laplacian Stack of Orange</h2>
-            <div class="row-images">
-                <div class="image-card">
-                    <img src="media/laplacian_orange_0.jpg" alt="Image 1" />
-                </div>
-                <div class="image-card">
-                    <img src="media/laplacian_orange_1.jpg" alt="Image 2" />
-                </div>
-                <div class="image-card">
-                    <img src="media/laplacian_orange_2.jpg" alt="Image 3" />
-                </div>
-                <div class="image-card">
-                    <img src="media/laplacian_orange_3.jpg" alt="Image 4" />
-                </div>
-                <div class="image-card">
-                    <img src="media/laplacian_orange_4.jpg" alt="Image 5" />
-                </div>
+            <div class="image-card">
+                <img src="media/morphed_aj_mean.jpg" alt="AJ Mean Face" />
+                <p>AJ morphed into Average</p>
+            </div>
+            <div class="image-card">
+                <img src="media/morphed_mean_aj.jpg" alt="Mean AJ Face" />
+                <p>Average morphed into AJ</p>
             </div>
         </section>
         <section>
-            <h2>Multiresolution Blending</h2>
+            <h2>Bells and Whistles</h2>
             <p>
-             Using Gaussian and Laplacian stacks we can make blended images that have a vertical, horizontal or irregualr seam where two different images merge.
-             The classic example of this is the orapple from <a href="https://persci.mit.edu/pub_pdfs/spline83.pdf">this paper</a>. I created my own orapple and recreated figure 3.42 from that paper. 
-             I also experiemneted using the moon and earth with a horizontal seam, as well as a random mask with small circles and a bullseye like mask. My goal was to make the craters of the moon look like the earth but the artistic appeal of the images is underwhelming.
+             Here I isolated the Danes dataset to just the female images and computed an average of just this subset. I then I morphed my face into the female shape, mrophed my appearance into the female appearance and morphed both the shape and appearance.
             </p>
-          </section>
-          <section class="image-section">
-            <h3>Recreating of figure 3.42</h2>
-            <div class="row-images">
-                <div class="image-card">
-                    <img src="media/lp_mask_apple_0.jpg" alt="Image 1" />
-                </div>
-                <div class="image-card">
-                    <img src="media/lp_mask_orange_0.jpg" alt="Image 2" />
-                </div>
-                <div class="image-card">
-                    <img src="media/blended_orapple_0.jpg" alt="Image 3" />
-                </div>
-            </div>
-            <div class="row-images">
-                <div class="image-card">
-                    <img src="media/lp_mask_apple_2.jpg" alt="Image 1" />
-                </div>
-                <div class="image-card">
-                    <img src="media/lp_mask_orange_2.jpg" alt="Image 2" />
-                </div>
-                <div class="image-card">
-                    <img src="media/blended_orapple_2.jpg" alt="Image 3" />
-                </div>
-            </div>
-            <div class="row-images">
-                <div class="image-card">
-                    <img src="media/lp_mask_apple_4.jpg" alt="Image 1" />
-                </div>
-                <div class="image-card">
-                    <img src="media/lp_mask_orange_4.jpg" alt="Image 2" />
-                </div>
-                <div class="image-card">
-                    <img src="media/blended_orapple_4.jpg" alt="Image 3" />
-                </div>
-            </div>
-            <div class="row-images">
-                <div class="image-card">
-                    <img src="media/collapsed_apple.jpg" alt="Image 1" />
-                </div>
-                <div class="image-card">
-                    <img src="media/collapsed_orange.jpg" alt="Image 2" />
-                </div>
-                <div class="image-card">
-                    <img src="media/orapple.jpg" alt="Image 3" />
-                </div>
-            </div>
-        </section> 
+        </section>
         <section class="image-section">
-            <h3>Some experimental final products</h2>
-            <section class="image-section">
-                <div class="image-card">
-                    <img src="media/orapple.jpg" alt="dy" />
-                    <p>Orapple</p>
-                </div>
-                <div class="image-card">
-                    <img src="media/earth_moon.jpg" alt="dy" />
-                    <p>Earth and Moon Vertical</p>
-                </div>
-                <div class="image-card">
-                    <img src="media/earth_moon_bullseye.jpg" alt="dy" />
-                    <p>Earth and Moon Bullseye</p>
-                </div>
-                <div class="image-card">
-                    <img src="media/earth_moon_craters.jpg" alt="dy" />
-                    <p>Earth and Moon Craters</p>
-                </div>
-            </section>
-        </section> 
-        <section class="image-section">
-            <h3>Stacks for EarthMoon</h2>
-            <div class="row-images">
-                <div class="image-card">
-                    <img src="media/lp_mask_earth_0.jpg" alt="Image 1" />
-                </div>
-                <div class="image-card">
-                    <img src="media/lp_mask_moon_0.jpg" alt="Image 2" />
-                </div>
-                <div class="image-card">
-                    <img src="media/blended_erthoon_0.jpg" alt="Image 3" />
-                </div>
+            <div class="image-card">
+                <img src="media/aj_female_shape.jpg" alt="" />
+                <p>AJ morphed into female shape</p>
             </div>
-            <div class="row-images">
-                <div class="image-card">
-                    <img src="media/lp_mask_earth_2.jpg" alt="Image 1" />
-                </div>
-                <div class="image-card">
-                    <img src="media/lp_mask_moon_2.jpg" alt="Image 2" />
-                </div>
-                <div class="image-card">
-                    <img src="media/blended_erthoon_2.jpg" alt="Image 3" />
-                </div>
+            <div class="image-card">
+                <img src="media/aj_female_appearance.jpg" alt="" />
+                <p>AJ morphed into female appearance</p>
             </div>
-            <div class="row-images">
-                <div class="image-card">
-                    <img src="media/lp_mask_earth_4.jpg" alt="Image 1" />
-                </div>
-                <div class="image-card">
-                    <img src="media/lp_mask_moon_4.jpg" alt="Image 2" />
-                </div>
-                <div class="image-card">
-                    <img src="media/blended_erthoon_4.jpg" alt="Image 3" />
-                </div>
-            </div>
-            <div class="row-images">
-                <div class="image-card">
-                    <img src="media/collapsed_earth.jpg" alt="Image 1" />
-                </div>
-                <div class="image-card">
-                    <img src="media/collapsed_moon.jpg" alt="Image 2" />
-                </div>
-                <div class="image-card">
-                    <img src="media/earth_moon.jpg" alt="Image 3" />
-                </div>
+            <div class="image-card">
+                <img src="media/aj_female_both.jpg" alt="" />
+                <p>Both appearance and shape morph</p>
             </div>
         </section>
     </div>
