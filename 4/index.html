@@ -104,6 +104,16 @@
         border: 1px solid #ddd;
         border-radius: 5px;
       }
+
+      .equation {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f4f4f4;
+            padding: 10px;
+            display: inline-block;
+        }
+        h1, h2 {
+            color: #333;
+        }
     </style>
   </head>
   <body>
@@ -155,7 +165,7 @@
         
         <p>Here, <em>p</em> and <em>p'</em> are homogeneous coordinates of corresponding points in the two images, and <em>H</em> is the 3x3 homography matrix. To recover <em>H</em>, we need a set of point correspondences between the two images.</p>
         
-        <h2>Setting up the System of Equations</h2>
+        <h3>Setting up the System of Equations</h3>
         
         <p>The homography matrix <em>H</em> has 8 degrees of freedom (since the 9th element can be set to 1 for scaling). Given at least 4 pairs of corresponding points, we can solve for the elements of <em>H</em> using a system of linear equations.</p>
         
@@ -181,7 +191,7 @@
             y' * (h7*x + h8*y + 1) = h4*x + h5*y + h6
         </div>
         
-        <h2>Matrix Form</h2>
+        <h3>Matrix Form</h3>
         
         <p>We can represent the system of equations in matrix form as <em>Ah = b</em>, where <em>h</em> is a vector containing the 8 unknown elements of the homography matrix, and <em>A</em> and <em>b</em> are constructed from the point correspondences.</p>
         
@@ -200,7 +210,7 @@
                  h7 h8 1]
         </div>
         
-        <h2>Application</h2>
+        <h3>Application</h3>
         
         <p>Once the homography matrix <em>H</em> is computed, it can be used to warp one image into the coordinate space of another image, or to rectify an image by mapping it to a known geometric shape (e.g., a square or rectangle).</p>
     </div>
