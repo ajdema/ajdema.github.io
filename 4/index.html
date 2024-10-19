@@ -263,7 +263,10 @@
         <section>
             <h2>Blend the images into a mosaic</h2>
             <p>
-                Now for the fun part I blended together images to create a mosaic. I used my two images of the campanile. I warped one image onto the other reference image and then stitched the corresponding pixels together using alpha blending for the pixels.
+                Now for the fun part I blended together images to create a mosaic. I used my two images of the campanile. 
+                The means to do this is to use my warp function to warp one image onto the other using the homography created from the correspondence points. Next you need to stitch the images together.
+                However, if you simply just take an average of pixels when stitching them together you will get inconsistent results. A better option is to use blending with an alpha mask which allows for a smooth transition where the imags overlap. 
+                You further need to keep track of if a given pixel is contributed to by one or two images and normalize accordingly.
             </p>
             <section class="image-section">
                 <div class="image-card">
@@ -278,7 +281,28 @@
                     <img src="media/mosaic_campanile.jpg" alt="" />
                     <p>Mosaiced Image</p>
                 </div>
+            </section>
+            <p>
+                You might notice in the bottom middle of my image there is an edge where the images don't line up too well. 
+                This is due to the fact that I turned my body insteadd of the camera when taking these photos. 
+                This inspired me to take more photos of the inside of my room to create another mosaic—this time being careful to only turn the camera around its focal point. Below are the results of this mosaic.
+            </p>
+            <section class="image-section">
+                <div class="image-card">
+                    <img src="media/room1.jpg" alt="" />
+                    <p>Image 1</p>
+                </div>
+                <div class="image-card">
+                    <img src="media/room2.jpg" alt="" />
+                    <p>Image 2</p>
+                </div>
+                <div class="image-card"></div>
+                    <img src="media/room_mosaic.jpg" alt="" />
+                    <p>Mosaiced Room</p>
+                </div>
+            </section>
         </section>
+        
     </div>
   </body>
 </html>
