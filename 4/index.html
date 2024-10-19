@@ -67,19 +67,19 @@
         flex-wrap: nowrap;
         width: 100%;
         overflow-x: auto;
-        }
+      }
 
-        .row-images .image-card {
+      .row-images .image-card {
         flex: 1;
         text-align: center;
-        }
+      }
 
-        .row-images .image-card img {
+      .row-images .image-card img {
         width: 100px; /* Set smaller width only for these specific images */
         height: auto;
         border: 1px solid #ddd;
         border-radius: 5px;
-        }
+      }
       .two-column {
         display: flex;
         flex-wrap: wrap; /* Ensures responsiveness */
@@ -106,14 +106,15 @@
       }
 
       .equation {
-            font-family: 'Courier New', Courier, monospace;
-            background-color: #f4f4f4;
-            padding: 10px;
-            display: inline-block;
-        }
-        h1, h2 {
-            color: #333;
-        }
+        font-family: "Courier New", Courier, monospace;
+        background-color: #f4f4f4;
+        padding: 10px;
+        display: inline-block;
+      }
+      h1,
+      h2 {
+        color: #333;
+      }
     </style>
   </head>
   <body>
@@ -123,187 +124,253 @@
     <div class="container">
       <section>
         <h2>Project Overview</h2>
-        <p>In this project I make use of homographies to warp images such that transforms between images are projective. This is a technique often used to create panoramas.</p>
+        <p>
+          In this project I make use of homographies to warp images such that
+          transforms between images are projective. This is a technique often
+          used to create panoramas.
+        </p>
       </section>
       <section>
         <h2>Taking Images</h2>
         <p>
-          I took two images of the campanile standing in the same spot but slightly turning my phone for the second photo. I also took several photos of rectanuglar objects in my room to rectify. 
+          I took two images of the campanile standing in the same spot but
+          slightly turning my phone for the second photo. I also took several
+          photos of rectanuglar objects in my room to rectify.
         </p>
       </section>
       <section class="image-section">
         <div class="image-card">
-            <img src="media/campanile_1.jpg" alt="" />
-            <p>Campanile Image 1</p>
+          <img src="media/campanile_1.jpg" alt="" />
+          <p>Campanile Image 1</p>
         </div>
         <div class="image-card">
-            <img src="media/campanile_2.jpg" alt="" />
-            <p>Campanile Image 2</p>
+          <img src="media/campanile_2.jpg" alt="" />
+          <p>Campanile Image 2</p>
         </div>
       </section>
       <section class="image-section">
         <div class="image-card">
-            <img src="media/coffee_table_1.jpg" alt="" />
-            <p>Coffee Table</p>
+          <img src="media/coffee_table_1.jpg" alt="" />
+          <p>Coffee Table</p>
         </div>
         <div class="image-card">
-            <img src="media/dali_book.jpg" alt="" />
-            <p>Dali Book</p>
+          <img src="media/dali_book.jpg" alt="" />
+          <p>Dali Book</p>
         </div>
         <div class="image-card">
-            <img src="media/vulfpeck.jpg" alt="" />
-            <p>Vulfpeck Poster</p>
+          <img src="media/vulfpeck.jpg" alt="" />
+          <p>Vulfpeck Poster</p>
         </div>
       </section>
       <section>
         <h2>Recovering Homographies</h2>
-        <p>A homography is a transformation that maps points from one plane to another using a 3x3 matrix. Given two images, we want to find the homography matrix <em>H</em> such that corresponding points in both images satisfy:</p>
+        <p>
+          A homography is a transformation that maps points from one plane to
+          another using a 3x3 matrix. Given two images, we want to find the
+          homography matrix <em>H</em> such that corresponding points in both
+          images satisfy:
+        </p>
 
-        <div class="equation">
-            p' = H * p
-        </div>
-        
-        <p>Here, <em>p</em> and <em>p'</em> are homogeneous coordinates of corresponding points in the two images, and <em>H</em> is the 3x3 homography matrix. To recover <em>H</em>, we need a set of point correspondences between the two images.</p>
-        
+        <div class="equation">p' = H * p</div>
+
+        <p>
+          Here, <em>p</em> and <em>p'</em> are homogeneous coordinates of
+          corresponding points in the two images, and <em>H</em> is the 3x3
+          homography matrix. To recover <em>H</em>, we need a set of point
+          correspondences between the two images.
+        </p>
+
         <h3>Setting up the System of Equations</h3>
-        
-        <p>The homography matrix <em>H</em> has 8 degrees of freedom (since the 9th element can be set to 1 for scaling). Given at least 4 pairs of corresponding points, we can solve for the elements of <em>H</em> using a system of linear equations.</p>
-        
-        <p>For each pair of points <em>(x, y)</em> in the first image and <em>(x', y')</em> in the second image, we can derive the following equations:</p>
-        
+
+        <p>
+          The homography matrix <em>H</em> has 8 degrees of freedom (since the
+          9th element can be set to 1 for scaling). Given at least 4 pairs of
+          corresponding points, we can solve for the elements of
+          <em>H</em> using a system of linear equations.
+        </p>
+
+        <p>
+          For each pair of points <em>(x, y)</em> in the first image and
+          <em>(x', y')</em> in the second image, we can derive the following
+          equations:
+        </p>
+
         <div class="equation">
-            x' = h1*x + h2*y + h3<br>
-            y' = h4*x + h5*y + h6<br>
-            w' = h7*x + h8*y + 1
+          x' = h1*x + h2*y + h3<br />
+          y' = h4*x + h5*y + h6<br />
+          w' = h7*x + h8*y + 1
         </div>
-        
-        <p>To eliminate the non-linear dependency on <em>w'</em>, we divide by <em>w'</em> and express the system as:</p>
-        
+
+        <p>
+          To eliminate the non-linear dependency on <em>w'</em>, we divide by
+          <em>w'</em> and express the system as:
+        </p>
+
         <div class="equation">
-            x' = (h1*x + h2*y + h3) / (h7*x + h8*y + 1)<br>
-            y' = (h4*x + h5*y + h6) / (h7*x + h8*y + 1)
+          x' = (h1*x + h2*y + h3) / (h7*x + h8*y + 1)<br />
+          y' = (h4*x + h5*y + h6) / (h7*x + h8*y + 1)
         </div>
-        
-        <p>Rearranging the terms, we obtain two linear equations for each correspondence:</p>
-        
+
+        <p>
+          Rearranging the terms, we obtain two linear equations for each
+          correspondence:
+        </p>
+
         <div class="equation">
-            x' * (h7*x + h8*y + 1) = h1*x + h2*y + h3<br>
-            y' * (h7*x + h8*y + 1) = h4*x + h5*y + h6
+          x' * (h7*x + h8*y + 1) = h1*x + h2*y + h3<br />
+          y' * (h7*x + h8*y + 1) = h4*x + h5*y + h6
         </div>
-        
+
         <h3>Matrix Form</h3>
-        
-        <p>We can represent the system of equations in matrix form as <em>Ah = b</em>, where <em>h</em> is a vector containing the 8 unknown elements of the homography matrix, and <em>A</em> and <em>b</em> are constructed from the point correspondences.</p>
-        
-        <p>For each correspondence, the following two rows are added to <em>A</em>:</p>
-        
+
+        <p>
+          We can represent the system of equations in matrix form as
+          <em>Ah = b</em>, where <em>h</em> is a vector containing the 8 unknown
+          elements of the homography matrix, and <em>A</em> and <em>b</em> are
+          constructed from the point correspondences.
+        </p>
+
+        <p>
+          For each correspondence, the following two rows are added to
+          <em>A</em>:
+        </p>
+
         <div class="equation">
-            [-x, -y, -1,  0,  0,  0, x'*x, x'*y, x']<br>
-            [ 0,  0,  0, -x, -y, -1, y'*x, y'*y, y']
+          [-x, -y, -1, 0, 0, 0, x'*x, x'*y, x']<br />
+          [ 0, 0, 0, -x, -y, -1, y'*x, y'*y, y']
         </div>
-        
-        <p>We can then solve this overdetermined system using a least-squares method to recover the vector <em>h</em>, which can be reshaped into the 3x3 matrix <em>H</em>:</p>
-        
+
+        <p>
+          We can then solve this overdetermined system using a least-squares
+          method to recover the vector <em>h</em>, which can be reshaped into
+          the 3x3 matrix <em>H</em>:
+        </p>
+
         <div class="equation">
-            H = <br>
-            [h1 h2 h3<br>
-                 h4 h5 h6<br>
-                 h7 h8 1]
+          H = <br />
+          [h1 h2 h3<br />
+          h4 h5 h6<br />
+          h7 h8 1]
         </div>
-        
+
         <h3>Application</h3>
-        
-        <p>Once the homography matrix <em>H</em> is computed, it can be used to warp one image into the coordinate space of another image, or to rectify an image by mapping it to a known geometric shape (e.g., a square or rectangle).</p>
+
+        <p>
+          Once the homography matrix <em>H</em> is computed, it can be used to
+          warp one image into the coordinate space of another image, or to
+          rectify an image by mapping it to a known geometric shape (e.g., a
+          square or rectangle).
+        </p>
         <section>
-            <h2>Warping Images</h2>
-            <p>
-                Once the homography is estimated, the next step is to re-project one image onto another to create a seamless stitch. Let's assume we are projecting Image 1 onto Image 2.
-                To ensure smooth re-projection, we use an inverse warp technique. This begins by calculating the bounding box for the final image. We first take the four corners of Image 1 and apply the homography to map it onto the coordinate space of Image 2, determining the area where the final image will appear.
-                Next, we interpolate the pixel values from Image 1 to find their corresponding locations in the output image.
-            </p>
+          <h2>Warping Images</h2>
+          <p>
+            Once the homography is estimated, the next step is to re-project one
+            image onto another to create a seamless stitch. Let's assume we are
+            projecting Image 1 onto Image 2. To ensure smooth re-projection, we
+            use an inverse warp technique. This begins by calculating the
+            bounding box for the final image. We first take the four corners of
+            Image 1 and apply the homography to map it onto the coordinate space
+            of Image 2, determining the area where the final image will appear.
+            Next, we interpolate the pixel values from Image 1 to find their
+            corresponding locations in the output image.
+          </p>
         </section>
 
         <section>
-            <h2>Image Rectification</h2>
-            <p>
-                To confirm that my warping function and homography is working correctly, I rectified a few images. This means taking photos of a rectangualr object at an angle so that the object does not appear perfectly rectangualr, then warping that image onto a rectangle to show the object 'straight on'
-            </p>
-            <section class="image-section">
-                <div class="image-card">
-                    <img src="media/coffee_table_1.jpg" alt="" />
-                    <p>Coffee Table</p>
-                </div>
-                <div class="image-card">
-                    <img src="media/rectified_coffee.jpg" alt="" />
-                    <p>Rectified Coffee Table Rectified</p>
-                </div>
-            </section>
-            <section class="image-section">
-                <div class="image-card">
-                    <img src="media/dali_book.jpg" alt="" />
-                    <p>Dali Book</p>
-                </div>
-                <div class="image-card">
-                    <img src="media/rectified_dali.jpg" alt="" />
-                    <p>Rectified Dali Book </p>
-                </div>
-            </section>
-            <section class="image-section">
-                <div class="image-card">
-                    <img src="media/vulfpeck.jpg" alt="" />
-                    <p>Vulfpeck Poster</p>
-                </div>
-                <div class="image-card">
-                    <img src="media/rectified_vulf.jpg" alt="" />
-                    <p>Rectified Vulfpeck Poster</p>
-                </div>
-            </section>
+          <h2>Image Rectification</h2>
+          <p>
+            To confirm that my warping function and homography is working
+            correctly, I rectified a few images. This means taking photos of a
+            rectangualr object at an angle so that the object does not appear
+            perfectly rectangualr, then warping that image onto a rectangle to
+            show the object 'straight on'
+          </p>
+          <section class="image-section">
+            <div class="image-card">
+              <img src="media/coffee_table_1.jpg" alt="" />
+              <p>Coffee Table</p>
+            </div>
+            <div class="image-card">
+              <img src="media/rectified_coffee.jpg" alt="" />
+              <p>Rectified Coffee Table Rectified</p>
+            </div>
+          </section>
+          <section class="image-section">
+            <div class="image-card">
+              <img src="media/dali_book.jpg" alt="" />
+              <p>Dali Book</p>
+            </div>
+            <div class="image-card">
+              <img src="media/rectified_dali.jpg" alt="" />
+              <p>Rectified Dali Book</p>
+            </div>
+          </section>
+          <section class="image-section">
+            <div class="image-card">
+              <img src="media/vulfpeck.jpg" alt="" />
+              <p>Vulfpeck Poster</p>
+            </div>
+            <div class="image-card">
+              <img src="media/rectified_vulf.jpg" alt="" />
+              <p>Rectified Vulfpeck Poster</p>
+            </div>
+          </section>
         </section>
 
         <section>
-            <h2>Blend the images into a mosaic</h2>
-            <p>
-                Now for the fun part I blended together images to create a mosaic. I used my two images of the campanile. 
-                The means to do this is to use my warp function to warp one image onto the other using the homography created from the correspondence points. Next you need to stitch the images together.
-                However, if you simply just take an average of pixels when stitching them together you will get inconsistent results. A better option is to use blending with an alpha mask which allows for a smooth transition where the imags overlap. 
-                You further need to keep track of if a given pixel is contributed to by one or two images and normalize accordingly.
-            </p>
-            </section>
-            <section class="image-section">
-                <div class="image-card">
-                    <img src="media/campanile_1.jpg" alt="" />
-                    <p>Image 1</p>
-                </div>
-                <div class="image-card">
-                    <img src="media/campanile_2.jpg" alt="" />
-                    <p>Image 2</p>
-                </div>
-                <div class="image-card"></div>
-                    <img src="media/mosaic_campanile.jpg" alt="" />
-                    <p>Mosaiced Image</p>
-                </div>
-            </section>
-            <section>
-            <p>
-                You might notice in the bottom middle of my image there is an edge where the images don't line up too well. 
-                This is due to the fact that I turned my body insteadd of the camera when taking these photos. 
-                This inspired me to take more photos of the inside of my room to create another mosaic—this time being careful to only turn the camera around its focal point. Below are the results of this mosaic.
-            </p>
-            </section>
-            <section class="image-section">
-                <div class="image-card">
-                    <img src="media/room1.jpg" alt="" />
-                    <p>Image 1</p>
-                </div>
-                <div class="image-card">
-                    <img src="media/room2.jpg" alt="" />
-                    <p>Image 2</p>
-                </div>
-                <div class="image-card"></div>
-                    <img src="media/room_mosaic.jpg" alt="" />
-                    <p>Mosaiced Room</p>
-                </div>
-            </section>
+          <h2>Blend the images into a mosaic</h2>
+          <p>
+            Now for the fun part I blended together images to create a mosaic. I
+            used my two images of the campanile. The means to do this is to use
+            my warp function to warp one image onto the other using the
+            homography created from the correspondence points. Next you need to
+            stitch the images together. However, if you simply just take an
+            average of pixels when stitching them together you will get
+            inconsistent results. A better option is to use blending with an
+            alpha mask which allows for a smooth transition where the imags
+            overlap. You further need to keep track of if a given pixel is
+            contributed to by one or two images and normalize accordingly.
+          </p>
+        </section>
+        <section class="image-section">
+          <div class="image-card">
+            <img src="media/campanile_1.jpg" alt="" />
+            <p>Image 1</p>
+          </div>
+          <div class="image-card">
+            <img src="media/campanile_2.jpg" alt="" />
+            <p>Image 2</p>
+          </div>
+          <div class="image-card">
+            <img src="media/mosaic_campanile.jpg" alt="" />
+            <p>Mosaiced Campanile</p>
+          </div>
+        </section>
+        <section>
+          <p>
+            You might notice in the bottom middle of my image there is an edge
+            where the images don't line up too well. This is due to the fact
+            that I turned my body insteadd of the camera when taking these
+            photos. This inspired me to take more photos of the inside of my
+            room to create another mosaic—this time being careful to only turn
+            the camera around its focal point. Below are the results of this
+            mosaic.
+          </p>
+        </section>
+        <section class="image-section"></section>
+        <div class="image-card">
+          <img src="media/room1.jpg" alt="" />
+          <p>Image 1</p>
+        </div>
+        <div class="image-card">
+          <img src="media/room2.jpg" alt="" />
+          <p>Image 2</p>
+        </div>
+        <div class="image-card">
+          <img src="media/room_mosaic.jpg" alt="" />
+          <p>Mosaiced Room</p>
+        </div>
+      </section>
     </div>
   </body>
 </html>
