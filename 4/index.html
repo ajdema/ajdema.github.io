@@ -42,6 +42,8 @@
         flex-wrap: wrap;
         gap: 20px;
         margin-top: 20px;
+        width: 90%;
+        height: auto;
       }
       .image-card {
         flex: 1;
@@ -421,7 +423,7 @@
                 This technique is detailed in section 3 of the MOPS paper. At a basically level we would like to have say <em>n</em> points that are relatively spread out and are highly interesting. 
                 The algorithm to give us exactly this result defines a supression radius which is the minimum distance to a another keypoint with a significantly stronger response strength, 
                 mathematically: \( r_i = \min_i \left| \vec{x_i} - \vec{x_j} \right| \quad \forall \vec{x_j} : h(\vec{x_i}) < c_{\text{robust}} h(\vec{x_j}) \). We compute this for every keypoint and then take the K highest points. 
-                Per the paper's recommendation I set \(c_{robust} = 0.9), but took only 200 points (the paper reccomends 500) because my images are smaller.
+                Per the paper's recommendation I set \(c_{robust} = 0.9\), and took 500 points.
             </p>
         </section>
         <section class="image-section">
@@ -447,7 +449,7 @@
             <p>
                 Now that we have have features extracted for images, we can match these features and find good pairs of corresponding points between two images. 
                 For this I used Lowe's thresholding as detailed in section 5 of MOPS. This technique is leveraged ont he idea that the NN-1(nearest neighbor) will be a significantly better match than the NN-2(second nearest neighbor); thus, we take a pair if the ratio of 1-NN / 2-NN is below some threshold. 
-                Figure 6b in MOPS indicates that a good threshold is 0.4 which I found to be much to harsh in my case. 
+                Figure 6b in MOPS indicates that a good threshold is 0.4 which I found to be much too harsh in my case. 
                 I found that it's best to test a few thresholds for the specific pair of images and to err on the side of allowing some bad matchings in and rely on the RANSAC algorithm to produce a good homography. 
             </p>
         </section>
