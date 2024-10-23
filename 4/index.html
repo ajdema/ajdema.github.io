@@ -9,7 +9,7 @@
     ></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FEATURE MATCHING for AUTOSTITCHING</title>
+    <title>CS180 project 4</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -119,11 +119,11 @@
   </head>
   <body>
     <header>
-      <h1>Image Warping and Mosaicing (Part A)</h1>
+      <h1>CS180 project 4</h1>
     </header>
     <div class="container">
       <section>
-        <h2>Project Overview</h2>
+        <h2>Image Warping and Mosaicing (Part A)</h2>
         <p>
           In this project I make use of homographies to warp images such that
           transforms between images are projective. This is a technique often
@@ -388,12 +388,9 @@
         </div>
       </section>
     </div>
-      <header>
-        <h1>Feature Matching for Autostitching (Part B)</h1>
-      </header>
       <div class="container">
         <section>
-            <h2>Project Overview</h2>
+            <h2>Feature Matching for Autostitching (Part B)</h2>
             <p>
               In this part of the project the goal is to create mosaics like in part A,
                but instead fo manually selecting correspondences, I'll automaticlaly detect significant features in images 
@@ -424,13 +421,88 @@
                 This technique is detailed in section 3 of the MOPS paper. At a basically level we would like to have say <em>n</em> points that are relatively spread out and are highly interesting. 
                 The algorithm to give us exactly this result defines a supression radius which is the minimum distance to a another keypoint with a significantly stronger response strength, 
                 mathematically: \( r_i = \min_i \left| \vec{x_i} - \vec{x_j} \right| \quad \forall \vec{x_j} : h(\vec{x_i}) < c_{\text{robust}} h(\vec{x_j}) \). We compute this for every keypoint and then take the K highest points. 
-                Per the paper's recommendation I set \(c_{robust} = 0.9) and took 500 points.
+                Per the paper's recommendation I set \(c_{robust} = 0.9), but took only 200 points (the paper reccomends 500) because my images are smaller.
             </p>
         </section>
         <section class="image-section">
             <div class="image-card">
               <img src="media/anms_campanile_plot.png" alt="" />
               <p>Output of harris corner detection with suppression</p>
+            </div>
+        </section>
+        <section>
+            <h2> Feature Extraction </h2>
+            <p>
+                Using the keypoints found from ANMS, we can now extract 8x8 feature patches from a larger 40x40 patch around each keypoint. The idea is to downsample form the 40x40 patch and then bias/gain noramlize. 5 features form the Campanile image are shown below.
+            </p>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/feature_extraction.png" alt="" />
+              <p>Feature Extraction from Campanile Image 1</p>
+            </div>
+        </section>
+        <section>
+            <h2> Feature Matching </h2>
+            <p>
+                Now that we have have features extracted for images, we can match these features and find good pairs of corresponding points between two images. 
+                For this I used Lowe's thresholding as detailed in section 5 of MOPS. This technique is leveraged ont he idea that the NN-1(nearest neighbor) will be a significantly better match than the NN-2(second nearest neighbor); thus, we take a pair if the ratio of 1-NN / 2-NN is below some threshold. 
+                Figure 6b in MOPS indicates that a good threshold is 0.4 which I found to be much to harsh in my case. 
+                I found that it's best to test a few thresholds for the specific pair of images and to err on the side of allowing some bad matchings in and rely on the RANSAC algorithm to produce a good homography. 
+            </p>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/feature_matching_campanile_4.png" alt="" />
+              <p>Campanile Matching w/ threshold = 0.4</p>
+            </div>
+            <div class="image-card">
+              <img src="media/feature_matching_campanile_5.png" alt="" />
+              <p>Campanile Matching w/ threshold = 0.5</p>
+            </div>
+            <div class="image-card">
+                <img src="media/feature_matching_campanile_65.png" alt="" />
+                <p>Campanile Matching w/ threshold = 0.65</p>
+              </div>
+            <div class="image-card">
+                <img src="media/feature_matching_campanile_8.png" alt="" />
+                <p>Campanile Matching w/ threshold = 0.8</p>
+            </div>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/feature_matching_landscape_4.png" alt="" />
+              <p>Landscape Matching w/ threshold = 0.4</p>
+            </div>
+            <div class="image-card">
+              <img src="media/feature_matching_landscape_5.png" alt="" />
+              <p>Landscape Matching w/ threshold = 0.5</p>
+            </div>
+            <div class="image-card">
+                <img src="media/feature_matching_landscape_65.png" alt="" />
+                <p>Landscape Matching w/ threshold = 0.65</p>
+              </div>
+            <div class="image-card">
+                <img src="media/feature_matching_landscape_8.png" alt="" />
+                <p>Landscape Matching w/ threshold = 0.8</p>
+            </div>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/feature_matching_room_4.png" alt="" />
+              <p>Room Matching w/ threshold = 0.4</p>
+            </div>
+            <div class="image-card">
+              <img src="media/feature_matching_room_5.png" alt="" />
+              <p>Room Matching w/ threshold = 0.5</p>
+            </div>
+            <div class="image-card">
+                <img src="media/feature_matching_room_65.png" alt="" />
+                <p>Room Matching w/ threshold = 0.65</p>
+              </div>
+            <div class="image-card">
+                <img src="media/feature_matching_room_8.png" alt="" />
+                <p>Room Matching w/ threshold = 0.8</p>
             </div>
         </section>
       </div>
