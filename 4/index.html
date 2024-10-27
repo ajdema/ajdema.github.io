@@ -495,7 +495,7 @@
                 <p>Room Matching w/ threshold = 0.8</p>
             </div>
         </section>
-        <section></section>
+        <section>
             <h2> RANSAC Algorithm </h2>
             <p>
                 Even after our feature matching we can see that there exists several outlier matchings in our plots. To fix this we'll use RANSAC (Random Sample Consensus). 
@@ -508,6 +508,50 @@
               <img src="media/campanile_ransac_match.png" alt="" />
               <p>Campanile Matching w/ RANSAC</p>
             </div>
+        </section>
+        <section>
+            <h2> Mosaics Using Ransac </h2>
+            <p>
+                Using the homogrpahies found with the RANSAC algorithm we can now make even better Moasaics than in Part A. Below we can see the side by side of manual correspondances and automatic correspondances.
+            </p>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/ransac_moasic_room.jpg" alt="" />
+              <p>Room Mosaic w/ RANSAC</p>
+            </div>
+            <div class="image-card">
+                <img src="media/room_mosaic.jpg" alt="" />
+                <p>Room Mosaic w/ manual correspondances</p>
+            </div>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/ransac_moasic_landscape.jpg" alt="" />
+              <p>Landscape Mosaic w/ RANSAC</p>
+            </div>
+            <div class="image-card">
+                <img src="media/mosaic_landscape.jpg" alt="" />
+                <p>Landscape Mosaic w/ manual correspondances</p>
+            </div>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/ransac_moasic_campanile.jpg" alt="" />
+              <p>Campanile Mosaic w/ RANSAC</p>
+            </div>
+            <div class="image-card">
+                <img src="media/mosaic_campanile.jpg" alt="" />
+                <p>Campanile Mosaic w/ manual correspondances</p>
+            </div>
+        </section>
+        <section>
+            <h2> Reflection </h2>
+            <p>
+                This project was very interesting and taught me how to read and implement a research paper very nicely. 
+                It was very cool to see how effective the RANSAC algorithm is. When I initially learned of the RANSAC algortihm, I was skeptical; it seemed inefficient and not robust. 
+                However after running it several times and getting great results every time I was convinced. I also found the results of rectification quite satisfying and as an art enthusiast it's cool to see how it's been used to identify floor patterns on old paintings.
+            </p>
         </section>
       </div>
   </body>
