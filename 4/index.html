@@ -495,6 +495,20 @@
                 <p>Room Matching w/ threshold = 0.8</p>
             </div>
         </section>
+        <section></section>
+            <h2> RANSAC Algorithm </h2>
+            <p>
+                Even after our feature matching we can see that there exists several outlier matchings in our plots. To fix this we'll use RANSAC (Random Sample Consensus). 
+                The idea of this algorithm is to randomly select 4 key point pairs and compute a homogrpahy for those pairs. Then determine weather those pairs are inliers by evalutaing if dist(Hp, p') < \( \epsilon\). 
+                Repeat this n times saving the homogrpahy computed over the most inlier points. This is the homography that we'll use to warp our image. Below I've plotted the pairs that RANSAC identified as inliers.
+            </p>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/campanile_ransac_match.png" alt="" />
+              <p>Campanile Matching w/ RANSAC</p>
+            </div>
+        </section>
       </div>
   </body>
 </html>
