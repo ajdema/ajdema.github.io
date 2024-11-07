@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CS180 project 4</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+      header {
+        background-color: #333;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+      }
+      .container {
+        max-width: 1000px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        color: #333;
+      }
+      p {
+        line-height: 1.6;
+      }
+      .image-section {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-top: 20px;
+        width: 100%;
+        height: auto;
+      }
+      .image-card {
+        flex: 1;
+        min-width: 100px;
+        max-width: 1000px;
+        text-align: center;
+      }
+      .image-card img {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      .image-card p {
+        margin-top: 10px;
+      }
+      .row-images {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: nowrap;
+        width: 100%;
+        overflow-x: auto;
+      }
+
+      .row-images .image-card {
+        flex: 1;
+        text-align: center;
+      }
+
+      .row-images .image-card img {
+        width: 100px; /* Set smaller width only for these specific images */
+        height: auto;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      .two-column {
+        display: flex;
+        flex-wrap: wrap; /* Ensures responsiveness */
+        gap: 20px; /* Adds some space between the columns */
+        margin-top: 20px;
+      }
+
+      .text-column {
+        flex: 1;
+        min-width: 200px;
+      }
+
+      .image-column {
+        flex: 1;
+        min-width: 200px;
+        text-align: center;
+      }
+
+      .image-column img {
+        max-width: 100%;
+        height: auto;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+
+      .equation {
+        font-family: "Courier New", Courier, monospace;
+        background-color: #f4f4f4;
+        padding: 10px;
+        display: inline-block;
+      }
+      h1,
+      h2 {
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>CS180 project 5</h1>
+    </header>
+    <div class="container">
+      <section>
+        <h2>The Power of Diffusion Models! (Part A)</h2>
+        <p>
+          TODO
+        </p>
+      </section>
+      <section>
+        <h2>Part 0: A few examples with DeepFloyd</h2>
+        <p>
+            <a href="https://huggingface.co/DeepFloyd/IF-I-XL-v1.0"> "DeepFloyd"</a> 
+            is a two stage Diffusion model trained by Stability AI. The first stage generates 64 x 64 images and then upsamples them 256 x 256. 
+            Below are some outputs with varrying numbers of iteratives steps which dictate how many denoising steps are taken. 
+            As supported by the images, as you take more steps you get clearer more detailed imagse but the runtime increases quite a bit, consequently.
+        </p>
+      </section>
+      <section class="image-section">
+        <div class="image-card">
+          <img src="media/prompt1_i10_256by.png" alt="" />
+          <p>"an oil painting of a snowy mountain village" 10 iteratitions 256x256</p>
+        </div>
+        <div class="image-card">
+          <img src="media/prompt2_i10_256by.png" alt="" />
+          <p>"a man wearing a hat" 10 iterations 256x256</p>
+        </div>
+        <div class="image-card">
+            <img src="media/prompt3_i10_256by.png" alt="" />
+            <p>"a rocket ship" 10 iterations 256x256</p>
+          </div>
+      </section>
+      <section class="image-section">
+        <div class="image-card">
+          <img src="media/prompt1_i20_256by.jpg" alt="" />
+          <p>"an oil painting of a snowy mountain village" 20 iteratitions 256x256</p>
+        </div>
+        <div class="image-card">
+          <img src="media/prompt2_i20_256by.jpg" alt="" />
+          <p>"a man wearing a hat" 20 iterations 256x256</p>
+        </div>
+        <div class="image-card">
+            <img src="media/prompt3_i20_256by.jpg" alt="" />
+            <p>"a rocket ship" 20 iterations 256x256</p>
+          </div>
+      </section>
+      <section class="image-section">
+        <div class="image-card">
+          <img src="media/prompt1_i500_256by.jpg" alt="" />
+          <p>"an oil painting of a snowy mountain village" 500 iteratitions 256x256</p>
+        </div>
+        <div class="image-card">
+          <img src="media/prompt2_i500_256by.jpg" alt="" />
+          <p>"a man wearing a hat" 500 iterations 256x256</p>
+        </div>
+        <div class="image-card">
+            <img src="media/prompt3_i500_256by.jpg" alt="" />
+            <p>"a rocket ship" 500 iterations 256x256</p>
+          </div>
+      </section>
+      <section>
+        <h2>Part 1.1 Forward Pass of sampling loop. </h2>
+        <p>
+          The idea of a sampling loop is to begin with a clean image x<sub>0</sub> and 
+          progressively add more noise to this image giving x<sub>t</sub> until 
+          at timestep <em>t=T</em> we have in image of essentially pure noise. 
+          The goal of a diffusion model is to remove this noise by predicting the noise in an image.
+        </p>
+
+        <p>
+            The first step is the forward pass which encompasses adding noise to a clean image. Which is defined by the formula, 
+            x<sub>t</sub> = &radic;<span style="text-decoration:overline;">&alpha;<sub>t</sub></span> x<sub>0</sub> + &radic;<span style="text-decoration:overline;">1 - &alpha;<sub>t</sub></span> &epsilon;
+            where <span style="text-decoration:overline;">&alpha;<sub>t</sub> is the noise coefficient. Below are noisy images a various <em>t</em>'s for a sample image of the campanile.
+        </p>
+
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/berkeley_campanile.png" alt="" />
+              <p>Berkeley Campanile</p>
+            </div>
+            <div class="image-card">
+              <img src="media/test_image_at_t250.jpg" alt="" />
+              <p>Campanile at t = 250</p>
+            </div>
+            <div class="image-card">
+                <img src="media/test_image_at_t500.jpg" alt="" />
+                <p>Campanile at t = 500</p>
+            </div>
+            <div class="image-card">
+                <img src="media/test_image_at_t750.jpg" alt="" />
+                <p>Campanile at t = 750</p>
+            </div>
+          </section>
+        <section>
+          <h2>Part 1.2 Classical Denoising</h2>
+          <p>
+            A basic approach to denoising is to use a Gaussian blurr to remove the noise in the image, however as seen below the results are not so great.
+          </p>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/test_image_at_t250.png" alt="" />
+              <p>Berkeley Campanile at t = 250</p>
+            </div>
+            <div class="image-card">
+              <img src="media/denoised_image_at_t250.jpg" alt="" />
+              <p>Campanile at t = 250 Denoised</p>
+            </div>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/test_image_at_t500.png" alt="" />
+              <p>Berkeley Campanile at t = 500</p>
+            </div>
+            <div class="image-card">
+              <img src="media/denoised_image_at_t500.jpg" alt="" />
+              <p>Campanile at t = 500 Denoised</p>
+            </div>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/test_image_at_t750.png" alt="" />
+              <p>Berkeley Campanile at t = 750</p>
+            </div>
+            <div class="image-card">
+              <img src="media/denoised_image_at_t750.jpg" alt="" />
+              <p>Campanile at t = = 750 Denoised</p>
+            </div>
+        </section>
+        <section>
+          <h2>Image Rectification</h2>
+          <p>
+            To confirm that my warping function and homography is working
+            correctly, I rectified a few images. This means taking photos of a
+            rectangualr object at an angle so that the object does not appear
+            perfectly rectangualr, then warping that image onto a rectangle to
+            show the object 'straight on'
+          </p>
+          <section class="image-section">
+            <div class="image-card">
+              <img src="media/coffee_table_1.jpg" alt="" />
+              <p>Coffee Table</p>
+            </div>
+            <div class="image-card">
+              <img src="media/rectified_coffee.jpg" alt="" />
+              <p>Rectified Coffee Table Rectified</p>
+            </div>
+          </section>
+          <section class="image-section">
+            <div class="image-card">
+              <img src="media/dali_book.jpg" alt="" />
+              <p>Dali Book</p>
+            </div>
+            <div class="image-card">
+              <img src="media/rectified_dali.jpg" alt="" />
+              <p>Rectified Dali Book</p>
+            </div>
+          </section>
+          <section class="image-section">
+            <div class="image-card">
+              <img src="media/vulfpeck.jpg" alt="" />
+              <p>Vulfpeck Poster</p>
+            </div>
+            <div class="image-card">
+              <img src="media/rectified_vulf.jpg" alt="" />
+              <p>Rectified Vulfpeck Poster</p>
+            </div>
+          </section>
+        </section>
+
+        <section>
+          <h2>Blend the images into a mosaic</h2>
+          <p>
+            Now for the fun part I blended together images to create a mosaic. I
+            used my two images of the campanile. The means to do this is to use
+            my warp function to warp one image onto the other using the
+            homography created from the correspondence points. Next you need to
+            stitch the images together. However, if you simply just take an
+            average of pixels when stitching them together you will get
+            inconsistent results. A better option is to use blending with an
+            alpha mask which allows for a smooth transition where the imags
+            overlap. You further need to keep track of if a given pixel is
+            contributed to by one or two images and normalize accordingly.
+          </p>
+        <section class="image-section">
+          <div class="image-card">
+            <img src="media/campanile_1.jpg" alt="" />
+            <p>Image 1</p>
+          </div>
+          <div class="image-card">
+            <img src="media/campanile_2.jpg" alt="" />
+            <p>Image 2</p>
+          </div>
+        </section>
+        <section class="image-section">
+          <div class="image-card">
+            <img src="media/mosaic_campanile.jpg" alt="" />
+            <p>Mosaiced Campanile</p>
+          </div>
+        </section>
+          <p>
+            You might notice in the bottom middle of my image there is an edge
+            where the images don't line up too well. This is due to the fact
+            that I turned my body instead of the camera when taking these
+            photos. This inspired me to take more photos of the inside of my
+            room and a beautiful landscape to create more mosaics, this time being careful to only turn
+            the camera around its focal point. Below are the results of these mosaics.
+          </p>
+        <section class="image-section">
+        <div class="image-card">
+          <img src="media/room1.jpg" alt="" />
+          <p>Image 1</p>
+        </div>
+        <div class="image-card">
+          <img src="media/room2.jpg" alt="" />
+          <p>Image 2</p>
+        </div>
+      </section>
+      <section class="image-section">
+        <div class="image-card">
+            <img src="media/room_mosaic.jpg" alt="" />
+            <p>Mosaiced Room</p>
+        </div>
+      </section>
+      <section class="image-section">
+        <div class="image-card">
+          <img src="media/landscape1.jpg" alt="" />
+          <p>Image 1</p>
+        </div>
+        <div class="image-card">
+          <img src="media/landscape2.jpg" alt="" />
+          <p>Image 2</p>
+        </div>
+      </section>
+      <section class="image-section">
+        <div class="image-card">
+            <img src="media/mosaic_landscape.jpg" alt="" />
+            <p>Mosaiced Landscape</p>
+        </div>
+      </section>
+    </div>
+      <div class="container">
+        <section>
+            <h2>Feature Matching for Autostitching (Part B)</h2>
+            <p>
+              In this part of the project the goal is to create mosaics like in part A,
+               but instead fo manually selecting correspondences, I'll automaticlaly detect significant features in images 
+               and use those points for correspondences. Much os this part of the project is based on the 
+               <a href="https://inst.eecs.berkeley.edu/~cs180/fa24/hw/proj4/Papers/MOPS.pdf"> “Multi-Image Matching using Multi-Scale Oriented Patches” by Brown et al.</a> paper.
+            </p>
+        </section>
+        <section>
+            <h2> Corner Detection </h2>
+            <p>
+                The first approach to detecting features uses Harris Corner detection which is detailed in section 2 of the MOPS paper. 
+                The idea is to take an outer product of gradients in the x and y direction giving you a harris matrix. 
+                Then looking at a window of this matrix you take the harmonic mean of the eigenvalues to determine a points "corner-strength". 
+                If both eigenvalues are small that's a flat region, if one eigenvalue is large and one small, that's an edge, if btoh eigenvalues are large, that's a corner. 
+                All points above a certain strength that aren't too close are considered interest points. Unfortunately the result of this is a very dense set of points that would be inefficient to use.
+            </p>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/harris_campanile_plot.png" alt="" />
+              <p>Output of harris corner detection before suppression</p>
+            </div>
+        </section>
+        <section>
+            <h2> Adaptive non-maximal suppression </h2>
+            <p>
+                One solution to our overly dense set of interest points is to use adaptive non-maximal suppression. 
+                This technique is detailed in section 3 of the MOPS paper. At a basically level we would like to have say <em>n</em> points that are relatively spread out and are highly interesting. 
+                The algorithm to give us exactly this result defines a supression radius which is the minimum distance to a another keypoint with a significantly stronger response strength, 
+                mathematically: \( r_i = \min_i \left| \vec{x_i} - \vec{x_j} \right| \quad \forall \vec{x_j} : h(\vec{x_i}) < c_{\text{robust}} h(\vec{x_j}) \). We compute this for every keypoint and then take the K highest points. 
+                Per the paper's recommendation I set \(c_{robust} = 0.9\), and took 500 points.
+            </p>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/anms_campanile_plot.png" alt="" />
+              <p>Output of harris corner detection with suppression</p>
+            </div>
+        </section>
+        <section>
+            <h2> Feature Extraction </h2>
+            <p>
+                Using the keypoints found from ANMS, we can now extract 8x8 feature patches from a larger 40x40 patch around each keypoint. The idea is to downsample from the 40x40 patch and then bias/gain noramlize. 5 features form the Campanile image are shown below.
+            </p>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/feature_extraction.png" alt="" />
+              <p>Feature Extraction from Campanile Image 1</p>
+            </div>
+        </section>
+        <section>
+            <h2> Feature Matching </h2>
+            <p>
+                Now that we have have features extracted for images, we can match these features and find good pairs of corresponding points between two images. 
+                For this I used Lowe's thresholding as detailed in section 5 of MOPS. This technique is leveraged ont he idea that the NN-1(nearest neighbor) will be a significantly better match than the NN-2(second nearest neighbor); thus, we take a pair if the ratio of 1-NN / 2-NN is below some threshold. 
+                Figure 6b in MOPS indicates that a good threshold is 0.4 which I found to be much too harsh in my case. 
+                I found that it's best to test a few thresholds for the specific pair of images and to err on the side of allowing some bad matchings in and rely on the RANSAC algorithm to produce a good homography. 
+            </p>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/feature_matching_campanile_4.png" alt="" />
+              <p>Campanile Matching w/ threshold = 0.4</p>
+            </div>
+            <div class="image-card">
+                <img src="media/feature_matching_campanile_65.png" alt="" />
+                <p>Campanile Matching w/ threshold = 0.65</p>
+              </div>
+            <div class="image-card">
+                <img src="media/feature_matching_campanile_8.png" alt="" />
+                <p>Campanile Matching w/ threshold = 0.8</p>
+            </div>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/feature_matching_landscape_4.png" alt="" />
+              <p>Landscape Matching w/ threshold = 0.4</p>
+            </div>
+            <div class="image-card">
+                <img src="media/feature_matching_landscape_65.png" alt="" />
+                <p>Landscape Matching w/ threshold = 0.65</p>
+              </div>
+            <div class="image-card">
+                <img src="media/feature_matching_landscape_8.png" alt="" />
+                <p>Landscape Matching w/ threshold = 0.8</p>
+            </div>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/feature_matching_room_4.png" alt="" />
+              <p>Room Matching w/ threshold = 0.4</p>
+            </div>
+            <div class="image-card">
+                <img src="media/feature_matching_room_65.png" alt="" />
+                <p>Room Matching w/ threshold = 0.65</p>
+              </div>
+            <div class="image-card">
+                <img src="media/feature_matching_room_8.png" alt="" />
+                <p>Room Matching w/ threshold = 0.8</p>
+            </div>
+        </section>
+        <section>
+            <h2> RANSAC Algorithm </h2>
+            <p>
+                Even after our feature matching we can see that there exists several outlier matchings in our plots. To fix this we'll use RANSAC (Random Sample Consensus). 
+                The idea of this algorithm is to randomly select 4 key point pairs and compute a homogrpahy for those pairs. Then determine weather those pairs are inliers by evalutaing if dist(Hp, p') < \( \epsilon\). 
+                Repeat this n times saving the homogrpahy computed over the most inlier points. I chose n=5000 and \( \epsilon = 5 \). This is the homography that we'll use to warp our image. Below I've plotted the pairs that RANSAC identified as inliers. 
+            </p>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/campanile_ransac_match.png" alt="" />
+              <p>Campanile Matching w/ RANSAC</p>
+            </div>
+        </section>
+        <section>
+            <h2> Mosaics Using Ransac </h2>
+            <p>
+                Using the homogrpahies found with the RANSAC algorithm we can now make even better Moasaics than in Part A. Below we can see the side by side of manual correspondances and automatic correspondances.
+            </p>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/ransac_moasic_room.jpg" alt="" />
+              <p>Room Mosaic w/ RANSAC</p>
+            </div>
+            <div class="image-card">
+                <img src="media/room_mosaic.jpg" alt="" />
+                <p>Room Mosaic w/ manual correspondances</p>
+            </div>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/ransac_moasic_landscape.jpg" alt="" />
+              <p>Landscape Mosaic w/ RANSAC</p>
+            </div>
+            <div class="image-card">
+                <img src="media/mosaic_landscape.jpg" alt="" />
+                <p>Landscape Mosaic w/ manual correspondances</p>
+            </div>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/mosaic_campanile.jpg" alt="" />
+              <p>Campanile Mosaic w/ RANSAC</p>
+            </div>
+            <div class="image-card">
+                <img src="media/ransac_moasic_campanile.jpg" alt="" />
+                <p>Campanile Mosaic w/ manual correspondances</p>
+            </div>
+        </section>
+        <section>
+            <h2> Reflection </h2>
+            <p>
+                This project was very interesting and taught me how to read and implement a research paper very nicely. 
+                It was very cool to see how effective the RANSAC algorithm is. When I initially learned of the RANSAC algortihm, I was skeptical; it seemed inefficient and not robust. 
+                However after running it several times and getting great results every time I was convinced. I also found the results of rectification quite satisfying and as an art enthusiast it's cool to see how it's been used to identify floor patterns on old paintings.
+            </p>
+        </section>
+      </div>
+  </body>
+</html>
