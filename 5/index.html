@@ -251,117 +251,175 @@
             </div>
         </section>
         <section>
-          <h2>Image Rectification</h2>
+          <h2>Part 1.3 One-Step Denoising</h2>
           <p>
-            To confirm that my warping function and homography is working
-            correctly, I rectified a few images. This means taking photos of a
-            rectangualr object at an angle so that the object does not appear
-            perfectly rectangualr, then warping that image onto a rectangle to
-            show the object 'straight on'
+            For this part we use a pretrained UNet to recover gaussian noise dorm the image and then remove this noise and in theory getr something close to the original image. I ran this for <em>t</em> = [250, 500, 750] and displayed the images below.
           </p>
           <section class="image-section">
             <div class="image-card">
-              <img src="media/coffee_table_1.jpg" alt="" />
-              <p>Coffee Table</p>
+              <img src="media/noisy_campanile_at_t250.jpg" alt="" />
+              <p>Noisy Campanile at t=250</p>
             </div>
             <div class="image-card">
-              <img src="media/rectified_coffee.jpg" alt="" />
-              <p>Rectified Coffee Table Rectified</p>
+              <img src="media/noisy_campanile_at_t500.jpg" alt="" />
+              <p>Noisy Campanile at t=500</p>
             </div>
+            <div class="image-card">
+                <img src="media/noisy_campanile_at_t750.jpg" alt="" />
+                <p>Noisy Campanile at t=750</p>
+              </div>
           </section>
           <section class="image-section">
             <div class="image-card">
-              <img src="media/dali_book.jpg" alt="" />
-              <p>Dali Book</p>
+              <img src="media/step_denoised_image_at_t250.jpg" alt="" />
+              <p>One-Step Denoised Campanile at t=250</p>
             </div>
             <div class="image-card">
-              <img src="media/rectified_dali.jpg" alt="" />
-              <p>Rectified Dali Book</p>
-            </div>
-          </section>
-          <section class="image-section">
-            <div class="image-card">
-              <img src="media/vulfpeck.jpg" alt="" />
-              <p>Vulfpeck Poster</p>
+              <img src="media/step_denoised_image_at_t500.jpg" alt="" />
+              <p>One-Step Denoised Campanile at t=500</p>
             </div>
             <div class="image-card">
-              <img src="media/rectified_vulf.jpg" alt="" />
-              <p>Rectified Vulfpeck Poster</p>
-            </div>
+                <img src="media/step_denoised_image_at_t750.jpg" alt="" />
+                <p>One-Step Denoised Campanile at t=750</p>
+              </div>
           </section>
         </section>
 
         <section>
-          <h2>Blend the images into a mosaic</h2>
+          <h2>Part 1.4 Iterative Denoising</h2>
           <p>
-            Now for the fun part I blended together images to create a mosaic. I
-            used my two images of the campanile. The means to do this is to use
-            my warp function to warp one image onto the other using the
-            homography created from the correspondence points. Next you need to
-            stitch the images together. However, if you simply just take an
-            average of pixels when stitching them together you will get
-            inconsistent results. A better option is to use blending with an
-            alpha mask which allows for a smooth transition where the imags
-            overlap. You further need to keep track of if a given pixel is
-            contributed to by one or two images and normalize accordingly.
+            In the last part we can see that the UNet struggles as you add more noise. 
+            For this part we iteratively denoise meaning that we denoise from x<sub>1000</sub> to x<sub>0</sub> step by step, we do so in strides of 30 to speed this up.
+            The formula for computing the next step is:
           </p>
+          <p>
+            \( x_{t'} = \frac{\sqrt{\overline{\alpha_{t'}} \beta_t}}{1 - \overline{\alpha_t}} x_0 + 
+            \sqrt{\alpha_t \frac{(1 - \overline{\alpha_{t'}})}{1 - \overline{\alpha_t}}} x_t + v \sigma \)
+        </p>
+        <p>
+            Where &alpha;<sub>t</sub> = <span style="text-decoration:overline;">&alpha;<sub>t</sub> / <span style="text-decoration:overline;">&alpha;<sub>t'</sub>.
+        </p>
         <section class="image-section">
           <div class="image-card">
-            <img src="media/campanile_1.jpg" alt="" />
-            <p>Image 1</p>
+            <img src="media/berkeley_campanile.jpg" alt="" />
+            <p>Noisy Campanile at t=90</p>
           </div>
           <div class="image-card">
-            <img src="media/campanile_2.jpg" alt="" />
-            <p>Image 2</p>
+            <img src="media/iterative_denoise_240.jpg" alt="" />
+            <p>Noisy Campanile at t=240</p>
+          </div>
+          <div class="image-card"></div>
+            <img src="media/iterative_denoise_390.jpg" alt="" />
+            <p>Noisy Campanile at t=390</p>
+          </div>
+          <div class="image-card"></div>
+            <img src="media/iterative_denoise_540.jpg" alt="" />
+            <p>Noisy Campanile at t=540</p>
+          </div>
+          <div class="image-card"></div>
+            <img src="media/iterative_denoise_690.jpg" alt="" />
+            <p>Noisy Campanile at t=690</p>
           </div>
         </section>
         <section class="image-section">
+            <div class="image-card">
+                <img src="media/iterative_denoise.jpg" alt="" />
+                <p>Originial Campanile</p>
+              </div>
           <div class="image-card">
-            <img src="media/mosaic_campanile.jpg" alt="" />
-            <p>Mosaiced Campanile</p>
+            <img src="media/iterative_denoise.jpg" alt="" />
+            <p>Iteratively Denoised Campanile</p>
+          </div>
+          <div class="image-card"></div>
+            <img src="media/onestep_denoise.jpg" alt="" />
+            <p>One-step Denoised Campanile</p>
+          </div>
+          <div class="image-card"></div>
+            <img src="media/gaussian_blurred.jpg" alt="" />
+            <p>Gaussian Blurred Campanile</p>
           </div>
         </section>
-          <p>
-            You might notice in the bottom middle of my image there is an edge
-            where the images don't line up too well. This is due to the fact
-            that I turned my body instead of the camera when taking these
-            photos. This inspired me to take more photos of the inside of my
-            room and a beautiful landscape to create more mosaics, this time being careful to only turn
-            the camera around its focal point. Below are the results of these mosaics.
-          </p>
+    </section>
+    <section>
+        <h2>Part 1.5 Diffusion Model Sampling</h2>
+        <p>
+          We can use our iterative denoising to generate images form scratch, passing random noise in and making the text prompt "a high quality photo". Here's 5 results of that below. 
+        </p>
         <section class="image-section">
-        <div class="image-card">
-          <img src="media/room1.jpg" alt="" />
-          <p>Image 1</p>
-        </div>
-        <div class="image-card">
-          <img src="media/room2.jpg" alt="" />
-          <p>Image 2</p>
-        </div>
+          <div class="image-card">
+            <img src="media/generated_image_0.jpg" alt="" />
+            <p>Sample 1</p>
+          </div>
+          <div class="image-card">
+            <img src="media/generated_image_1.jpg" alt="" />
+            <p>Sample 2</p>
+          </div>
+          <div class="image-card">
+            <img src="media/generated_image_2.jpg" alt="" />
+            <p>Sample 3</p>
+          </div>
+          <div class="image-card">
+            <img src="media/generated_image_3.jpg" alt="" />
+            <p>Sample 4</p>
+          </div>
+          <div class="image-card">
+            <img src="media/generated_image_4.jpg" alt="" />
+            <p>Sample 5</p>
+          </div>
+        </section>
       </section>
-      <section class="image-section">
-        <div class="image-card">
-            <img src="media/room_mosaic.jpg" alt="" />
-            <p>Mosaiced Room</p>
+      <section></section>
+        <h2>Part 1.6 Classifier-Free Guidance (CFG)</h2>
+        <p>
+          The images from the previous section lack in quality and sometimes even appear nonsensical. 
+          To improve the results we'll use classifier-free guidance to refine the images by computing two different noise estimates: a <em>conditional noise estimate</em> and an <em>unconditional noise estimate</em>. 
+          By combining these two estimates, we can control the balance between diversity and quality in the images we generate.
+        </p>
+        <div class="formula-section">
+            <p>
+                In CFG, we denote the conditional noise estimate as \( \epsilon_{\text{cond}} \) and the unconditional noise estimate as \( \epsilon_{\text{uncond}} \).
+                Our new noise estimate \( \epsilon \) is then given by:
+            </p>
+            <p style="text-align: center;">
+                \[
+                \epsilon = \epsilon_{\text{uncond}} + s \cdot (\epsilon_{\text{cond}} - \epsilon_{\text{uncond}})
+                \]
+            </p>
+            <p>
+                Here, \( s \) is a scaling factor that controls the strength of the guidance. By adjusting \( s \), we can achieve different effects:
+            </p>
+            <ul>
+                <li>When \( s = 0 \), we obtain a purely unconditional noise estimate.</li>
+                <li>When \( s = 1 \), we recover the conditional noise estimate.</li>
+                <li>For values \( s > 1 \), we achieve enhanced image quality, often at the expense of diversity.</li>
+            </ul>
+            <p>
+                The true "magic" of CFG happens when \( s > 1 \). In this case, the generated images are often much higher in quality, providing clearer and more meaningful visuals compared to the unguided generation process.
+            </p>
         </div>
+        <section class="image-section">
+          <div class="image-card">
+            <img src="media/cfg_generated_image_0.jpg" alt="" />
+            <p>Sample 1 with CFG</p>
+          </div>
+          <div class="image-card">
+            <img src="media/cfg_generated_image_1.jpg" alt="" />
+            <p>Sample 2 with CFG</p>
+          </div>
+          <div class="image-card">
+            <img src="media/cfg_generated_image_2.jpg" alt="" />
+            <p>Sample 3 with CFG</p>
+          </div>
+          <div class="image-card">
+            <img src="media/cfg_generated_image_3.jpg" alt="" />
+            <p>Sample 4 with CFG</p>
+          </div>
+          <div class="image-card">
+            <img src="media/cfg_generated_image_4.jpg" alt="" />
+            <p>Sample 5 with CFG</p>
+          </div>
+        </section>
       </section>
-      <section class="image-section">
-        <div class="image-card">
-          <img src="media/landscape1.jpg" alt="" />
-          <p>Image 1</p>
-        </div>
-        <div class="image-card">
-          <img src="media/landscape2.jpg" alt="" />
-          <p>Image 2</p>
-        </div>
-      </section>
-      <section class="image-section">
-        <div class="image-card">
-            <img src="media/mosaic_landscape.jpg" alt="" />
-            <p>Mosaiced Landscape</p>
-        </div>
-      </section>
-    </div>
       <div class="container">
         <section>
             <h2>Feature Matching for Autostitching (Part B)</h2>
