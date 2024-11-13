@@ -82,6 +82,18 @@
         border: 1px solid #ddd;
         border-radius: 5px;
       }
+      .flipped-image {
+            transform: rotate(180deg);
+        }
+
+        /* Optional: style adjustments */
+        .image-section {
+            display: flex;
+            gap: 20px;
+        }
+        .image-card {
+            text-align: center;
+        }
       .two-column {
         display: flex;
         flex-wrap: wrap; /* Ensures responsiveness */
@@ -572,8 +584,52 @@
             <p>Sample 5</p>
           </div>
         </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/inpainted_david_0.png" alt="" />
+              <p>Sample 1</p>
+            </div>
+            <div class="image-card">
+              <img src="media/inpainted_david_1.png" alt="" />
+              <p>Sample 2</p>
+            </div>
+            <div class="image-card">
+              <img src="media/inpainted_david_2.png" alt="" />
+              <p>Sample 3</p>
+            </div>
+            <div class="image-card">
+              <img src="media/inpainted_david_3.png" alt="" />
+              <p>Sample 4</p>
+            </div>
+            <div class="image-card">
+              <img src="media/inpainted_david_4.png" alt="" />
+              <p>Sample 5</p>
+            </div>
+          </section>
+          <section class="image-section"></section>
+            <div class="image-card">
+              <img src="media/inpainted_dessert_0.png" alt="" />
+              <p>Sample 1</p>
+            </div>
+            <div class="image-card">
+              <img src="media/inpainted_dessert_1.png" alt="" />
+              <p>Sample 2</p>
+            </div>
+            <div class="image-card">
+              <img src="media/inpainted_dessert_2.png" alt="" />
+              <p>Sample 3</p>
+            </div>
+            <div class="image-card">
+              <img src="media/inpainted_dessert_3.png" alt="" />
+              <p>Sample 4</p>
+            </div>
+            <div class="image-card">
+              <img src="media/inpainted_dessert_4.png.jpg" alt="" />
+              <p>Sample 5</p>
+            </div>
+          </section>
       </section>
-      <section></section>
+      <section>
         <h2>Part 1.7.3 Text-Conditional Image-to-image Translation</h2>
         <p>
           We can add control to our previous results by changing th etext promp from "a high quality photo" to something more descriptive like "a rocket ship". The results below are for increasing values of i_start, as i_Start increases the model gets less "creative" and the output looks more like the input image.
@@ -604,7 +660,131 @@
             <p>Rocket ship at i_start=20</p>
           </div>
         </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/cfg_generated_pencil_1.png" alt="" />
+              <p>Pencil at i_start=1</p>
+            </div>
+            <div class="image-card">
+              <img src="media/cfg_generated_pencil_3.png" alt="" />
+              <p>Pencil at i_start=3</p>
+            </div>
+            <div class="image-card">
+              <img src="media/cfg_generated_pencil_5.png" alt="" />
+              <p>Pencil at i_start=5</p>
+            </div>
+            <div class="image-card">
+              <img src="media/cfg_generated_pencil_7.png" alt="" />
+              <p>Pencil at i_start=7</p>
+            </div>
+            <div class="image-card">
+              <img src="media/cfg_generated_pencil_10.png" alt="" />
+              <p>Pencil at i_start=10</p>
+            </div>
+            <div class="image-card">
+              <img src="media/cfg_generated_pencil_20.png" alt="" />
+              <p>Pencil at i_start=20</p>
+            </div>
+        </section>
+        <section class="image-section"></section>
+            <div class="image-card">
+              <img src="media/cfg_david_waterfall_1.png" alt="" />
+              <p>Waterfall at i_start=1</p>
+            </div>
+            <div class="image-card">
+              <img src="media/cfg_david_waterfall_3.png" alt="" />
+              <p>Waterfall at i_start=3</p>
+            </div>
+            <div class="image-card">
+              <img src="media/cfg_david_waterfall_5.png" alt="" />
+              <p>Waterfall at i_start=5</p>
+            </div>
+            <div class="image-card">
+              <img src="media/cfg_david_waterfall_7.png" alt="" />
+              <p>Waterfall at i_start=7</p>
+            </div>
+            <div class="image-card">
+              <img src="media/cfg_david_waterfall_10.png" alt="" />
+              <p>Waterfall at i_start=10</p>
+            </div>
+            <div class="image-card">
+              <img src="media/cfg_david_waterfall_20.png" alt="" />
+              <p>Waterfall at i_start=20</p>
+            </div>
+          </section>
       </section>
+      <section>
+        <h2>Part 1.8 Visual Anagrams</h2>
+        <p>
+          Getting even more creative we can create an image that looks like one thing right side up and another thing upside down, similar to Salvador Dali's <em>Elephants Reflecting Swans</em>. The idea is to compute two noises, one for a given prompt for example "an oil painting of an old man" and another for the same image but flipped and with the prompt "an oil painting of people around a campfire". Then, average these two noises and use that as your noise. 
+        </p>
+        <section class="image-section">
+          <div class="image-card">
+            <img src="media/old_man_camp_fire (2).jpg" alt="" />
+            <p>"Oil painting of an old man"</p>
+          </div>
+          <div class="image-card">
+            <img src="media/man_dog.jpg" alt="" />
+            <p>"A photo of a man""</p>
+          </div>
+          <div class="image-card">
+            <img src="media/snowy_waterfall.jpg" alt="" />
+            <p>"An oil painting of a snowy mountain village"</p>
+          </div>
+          <div class="image-card">
+            <img src="media/amalfi_skull.jpg" alt="" />
+            <p>"a photo of the amalfi cost"</p>
+          </div>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/old_man_camp_fire (2).jpg" alt="" class="flipped-image" />
+              <p>"An oil painting of people around a campfire"</p>
+            </div>
+            <div class="image-card">
+              <img src="media/man_dog.jpg" alt="" class="flipped-image" />
+              <p>"A photo of a dog"</p>
+            </div>
+            <div class="image-card">
+              <img src="media/snowy_waterfall.jpg" alt="" class="flipped-image" />
+              <p>"A lithograph of a waterfall"</p>
+            </div>
+            <div class="image-card">
+              <img src="media/amalfi_skull.jpg" alt="" class="flipped-image" />
+              <p>"A lithograph of a skull"</p>
+            </div>
+          </section>
+      </section>
+      <section>
+        <h2>Part 1.9 Hybrid Images</h2>
+        <p>
+          Similar to project 2 where I took advantage of the way humans percieve high and low frequnecy visual data, we can use a diffusion model to mkae factorized images that look like one thing from a far and another from close up. The idea is similar to the previous par tbut instead of flipping the image we just run a high pass and low pass filter on the image and take the noise with respect to two different text prompts, then sum this noise to get our overall noise. The results from this part are not as pleasing as the Visual Anagrams, I palyed around with tryong to weight the noise differently with emphasis on the "harder" prompt but still many of my images look dissatisfying.
+        </p>
+        <section class="image-section">
+          <div class="image-card">
+            <img src="media/waterfall_skull_hybrid.jpg (2).jpg" alt="" />
+            <p>"A lithograph of a skull" and "A lithograph of a waterfall"</p>
+          </div>
+          <div class="image-card">
+            <img src="media/waterfall_snowy_hybrid.jpg" alt="" />
+            <p>"An oil painting of a snowy mountain village" and "A lithograph of a waterfall"</p>
+          </div>
+          <div class="image-card">
+            <img src="media/skull_amalfi_hybrid.jpg" alt="" />
+            <p>"A lithograph of a skull" and "a photo of the amalfi cost"</p>
+          </div>
+          <div class="image-card">
+            <img src="media/skull_amalfi_hybrid (1).jpg" alt="" />
+            <p>"A lithograph of a skull" and "a photo of the amalfi cost" w/ emphasis on amalfi.</p>
+          </div>
+        </section>
+      </section>
+      <section>
+        <h2>Conclusion</h2>
+        <p>
+          This project was quite challenging and involved lots of trial and error with different input images and prompts and playing around with how to use the noise appropriately. However, it was quite rewarding and provided great insight into the capabilities of diffusion models and how to get creative and create some fun images that mess with human perception.
+        </p>
+    </section>
     </div>
   </body>
 </html>
