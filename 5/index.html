@@ -804,5 +804,74 @@
         </p>
     </section>
     </div>
+    <div class="container">
+        <section>
+            <h2>Diffusion Models from Scratch! (Part B)</h2>
+            <p>
+              In this next part of the project, I'll be training my own diffusion model on MNIST.
+            </p>
+        </section>
+        <section>
+            <h2>1.1 Implementing the UNet</h2>
+            <p>
+              The first step is to implement the denoiser as a <a href="https://arxiv.org/abs/1505.04597"> UNet.</a> A UNet has an encoder-decoder structure with skip connections which aims to capture the context of the input image by progressively reducing its spatial dimensions, and reconstructs the spatial information to its original resolution while maintaining the fine-grined details. My UNet follows the structure below.
+            </p>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/Unconditional_unet.png" alt="" />
+            </div>
+        </section>
+
+        <section>
+            <h2>1.2 Using the UNet to Train a Denoiser</h2>
+            <p>
+              To begin we'll just visualize varrying levels of noise on a few MNIST samples.
+            </p>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/mnist_noising_process.png" alt="" />
+            </div>
+        </section>
+
+        <section>
+            <h2>1.2.1 Training</h2>
+            <p>
+              Now it's time to train the model to denoise. I trained the denoiser on noisy images <em>z</em> with &sigma; = 0.5 applied to a clean image <em>x</em>. I used a batch size of 256 and 5 epochs with 128 hidden layers and the Adam optimizer with learning rate 1e-4.
+            </p>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/mnist_noising_process.png" alt="" />
+            </div>
+            <p>Training Loss Curve</p>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/denoising_results_epoch1.png" alt="" />
+            </div>
+            <p>Results on digits from the test set after 1 epoch</p>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/denoising_results_epoch5.png" alt="" />
+            </div>
+            <p>Results on digits from the test set after 5 epochs</p>
+        </section>
+
+        <section>
+            <h2>1.2.2 Out-of-Distribution Testing</h2>
+            <p>
+              The denoiser was trained on &sigma; = 0.5, but here I visualize how it performs on different sigma's.
+            </p>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/denoising_results_vary_noise.png" alt="" />
+            </div>
+            <p>Results on digits from the test set with varrying noise levels.</p>
+        </section>
+    </div>
   </body>
 </html>
