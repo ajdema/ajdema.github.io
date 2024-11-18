@@ -872,6 +872,56 @@
               <p>Results on digits from the test set with varrying noise levels.</p>
             </div>
         </section>
+        <section>
+            <h2>2.1 Adding Time Conditioning to UNet</h2>
+            <p>
+              To condition on time we need to inject a scalar <em>t</em> into the UNet like so.
+            </p>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/t_cond_graphic.png" alt="" />
+            </div>
+        </section>
+        <section>
+            <h2>2.2 Training the UNet</h2>
+            <p>
+             It's now time to train the UNet. This looks the same as before but this time we use our time conditioned model to predict the noise passing in a random <em>t</em>. This time training for 20 epochs because this task is more difficult and use 64 hidden channels. Below is the training loss curve.
+            </p>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/training_loss_curve_t_cond_unet (1).png" alt="" />
+            </div>
+            <p>Training loss curve for time-conditioned UNet</p>
+        </section>
+        <section>
+            <h2>2.3 Sampling from the UNet</h2>
+            <p>
+             For this part, we sample similar to how we did with the DeepFloyd model in part A; however, this time we don't need to predict the variance and can instead use 
+             <p>
+                A list <b>&Beta;</b> of length <b>T</b> such that:
+            </p>
+            <ul>
+                <li>&Beta;<sub>0</sub> = 0.0001</li>
+                <li>&Beta;<sub>T</sub> = 0.02</li>
+                <li>All other elements &Beta;<sub>t</sub> for <i>t</i> &isin; {1, ..., T-1} are evenly spaced between the two.</li>
+            </ul>
+            The sampling results for the 5th and 20th epochs are below
+            </p>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/t_cond_samp_5_epochs.png.png" alt="" />
+            </div>
+            <p>Samples for time-conditioned UNet at epoch 5</p>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/t_cond_samp_20_epochs.png.png" alt="" />
+            </div>
+            <p>Samples for time-conditioned UNet at epoch 20</p>
+        </section>
     </div>
   </body>
 </html>
