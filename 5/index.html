@@ -922,6 +922,18 @@
             </div>
             <p>Samples for time-conditioned UNet at epoch 20</p>
         </section>
+        <section>
+            <h2>2.4 Adding Class-conditioning to UNet</h2>
+            <p>
+             To condition the UNet on classes we do the same thing as time conditioning but we now also condition on a class tensor <em>c</em>. We repalce the original unflatten with: unflatten = c1 * unflatten + t1 and replace the original up1 with up1 = c2 * up1 + t1 where c1 and c2 are fc_1(c) and fc_2(c) respectively, using the same FCBlock we used for time conditioning. 
+            </p>
+        </section>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/c_cond_training_loss_curve.png" alt="" />
+            </div>
+            <p>Training loss curve for class-conditioned UNet</p>
+        </section>
     </div>
   </body>
 </html>
