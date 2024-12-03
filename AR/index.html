@@ -103,6 +103,20 @@
         border: 1px solid #ddd;
         border-radius: 5px;
       }
+      .video-container {
+      text-align: center;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+    }
+    p {
+      margin: 10px 0 0;
+      font-size: 1rem;
+      color: #333;
+    }
     </style>
   </head>
   <body>
@@ -119,10 +133,10 @@
         <p>
           I drew a regular grid pattern on a box so that I could easily annotate the points and measure their real 3D coordinates. I then took a simply video in which I pan around the box.
         </p>
-        <body>
+        <div class="video-container">
             <img src="media/input.gif" alt="Input GIF">
             <p>Input Video</p>
-          </body>
+        </div>
       </section>
       <section>
         <h2>Keypoints with known 3D world coordinates</h2>
@@ -132,14 +146,14 @@
             Now that we have 2D keypoints for the first frame we need to propogate those for each frame in the video. <br/>
             To do this I used <b>cv2.calcOpticalFlowPyrLK</b> which is Optical Flow with the Lucas-Kanade method for feature point tracking. It computes the motion of a list of points between two frames by using local gradients of pixel intensities to get the displacement. There were some points that it struggled to properly track which gave weird results, so I simply removed those points from my projection matrix calculation.
           </p>
-      <body>
+        <div class="video-container">
         <img src="media/output_video_with_tracking.gif" alt="Tracking GIF">
         <p>Tracking all points</p>
-      </body>
-      <body>
+        </div>
+        <div class="video-container">
         <img src="media/output_video_with_tracking3.gif" alt="Tracking GIF">
         <p>Tracking removed bad points</p>
-      </body>
+    </div>
       </section>
         <section>
             <h2>Calibrating the Camera</h2>
