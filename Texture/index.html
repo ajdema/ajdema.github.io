@@ -121,22 +121,105 @@
   </head>
   <body>
     <header>
-      <h1>Augmented Reality!</h1>
+      <h1>Texture Pyramid!</h1>
     </header>
     <div class="container">
       <section>
         <h2>Project Overview</h2>
-        <p>In this project I insert a synthetic object into a video I captured which is a basic fundamental of AR. The idea is to use 2D points from the video and 3D coordinates that are known to calibrate the camera for each frame and use projection matrix to project the 3D coordinates of your synthetic object into your 2D frames in the video.</p>
+        <p>TODO</p>
       </section>
       <section>
-        <h2>Input Video</h2>
+        <h2>Overview of Oriented Filters</h2>
         <p>
-          I drew a regular grid pattern on a box so that I could easily annotate the points and measure their real 3D coordinates. I then took a simply video in which I pan around the box.
+            Oriented filters are specifically designed to capture directional features in an image, such as edges and textures, along particular orientations. 
+            These filters are essential for applications like texture analysis and edge detection, where the orientation of features carries significant information. In this context, the oriented filterrs are 
+            used to decompose an image into multiple oriented bands. Each badn emphasizes image details aligned with a specific angle. The filters I used are shown below.
         </p>
-        <div class="video-container">
-            <img src="media/input.gif" alt="Input GIF">
-            <p>Input Video</p>
-        </div>
+        <section class="image-section">
+            <div class="image-card">
+              <img src="media/filter_type_0.jpg" alt="" />
+              <p>Filter 0</p>
+            </div>
+            <div class="image-card">
+              <img src="media/filter_type_1.jpg" alt="" />
+              <p>Filter 1</p>
+            </div>
+            <div class="image-card">
+                <img src="media/filter_type_2.jpg" alt="" />
+                <p>Filter 2</p>
+            </div>
+            <div class="image-card">
+                <img src="media/filter_type_3.jpg" alt="" />
+                <p>Filter 3</p>
+            </div>
+            <div class="image-card">
+                <img src="media/filter_type_4.jpg" alt="" />
+                <p>Filter 4</p>
+            </div>
+            <div class="image-card">
+                <img src="media/filter_type_5.jpg" alt="" />
+                <p>Filter 5</p>
+            </div>
+          </section>
+          <p>
+            A Laplacian bandpass filter isolates features within a specific frequency range by subtracting two successive levels of a Gaussian pyramid. This process results in a bandpass filter that emphasizes edges and texture details while suppressing uniform regions.
+
+            For a given frequency band, the sum of all oriented filters is mathematically equivalent to the Laplacian bandpass filter. This equivalence arises because the oriented filters collectively cover all possible directions in the image, reconstructing the complete bandpass information. Below are some results showing how the summing the result of filtering an image with all of the oriented filters is the same as the laplacian bandpass filter.
+          </p>
+          <section class="image-section">
+            <div class="image-card">
+                <img src="media/grey_fabric.png" alt="" />
+                <p>Input image of Gray Fabric</p>
+            </div>
+            <div class="image-card">
+                <img src="media/laplacian_stack_fabric_2.png" alt="" />
+                <p>Laplacian Pyramid of Gray Fabric</p>
+            </div>
+            <div class="image-card">
+                <img src="media/summed_grey_fabric.jpg" alt="" />
+                <p>Summed oriented filters of Gray Fabric</p>
+            </div>
+          </section>
+          <section class="image-section">
+            <div class="image-card">
+                <img src="media/grey_fabric_filtered_0.jpg" alt="" />
+                <p>Gray Fabric with filter 0</p>
+            </div>
+            <div class="image-card">
+                <img src="media/grey_fabric_filtered_1.jpg" alt="" />
+                <p>Gray Fabric with filter 1</p>
+            </div>
+            <div class="image-card">
+                <img src="media/grey_fabric_filtered_2.jpg" alt="" />
+                <p>Gray Fabric with filter 2</p>
+            </div>
+            <div class="image-card">
+                <img src="media/grey_fabric_filtered_3.jpg" alt="" />
+                <p>Gray Fabric with filter 3</p>
+            </div>
+            <div class="image-card">
+                <img src="media/grey_fabric_filtered_4.jpg" alt="" />
+                <p>Gray Fabric with filter 4</p>
+            </div>
+            <div class="image-card">
+                <img src="media/grey_fabric_filtered_5.jpg" alt="" />
+                <p>Gray Fabric with filter 5</p>
+            </div>
+          </section>
+          <section class="image-section">
+            <div class="image-card">
+                <img src="media/wood.png" alt="" />
+                <p>Input image of wood</p>
+            </div>
+            <div class="image-card">
+                <img src="media/laplacian_stack_wood_2.png" alt="" />
+                <p>Laplacian Pyramid of wood</p>
+            </div>
+            <div class="image-card">
+                <img src="media/summed_wood.jpg" alt="" />
+                <p>Summed oriented filters of wood</p>
+            </div>
+          </section>
       </section>
       <section>
         <h2>Keypoints with known 3D world coordinates</h2>
