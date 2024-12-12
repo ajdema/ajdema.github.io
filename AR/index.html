@@ -121,11 +121,11 @@
   </head>
   <body>
     <header>
-      <h1>Augmented Reality!</h1>
+      <h1>Final Project(s)</h1>
     </header>
     <div class="container">
       <section>
-        <h2>Project Overview</h2>
+        <h2>Augmented Reality Project Overview</h2>
         <p>In this project I insert a synthetic object into a video I captured which is a basic fundamental of AR. The idea is to use 2D points from the video and 3D coordinates that are known to calibrate the camera for each frame and use projection matrix to project the 3D coordinates of your synthetic object into your 2D frames in the video.</p>
       </section>
       <section>
@@ -188,6 +188,201 @@
                 <img src="media/output_video_with_cube3.gif" alt="Output GIF">
                 <p>Output Video with Cube</p>
             </div>
+        </section>
+    </div>
+    <div class="container">
+        <section>
+            <h2>High Dynamic Range Imaging Project Overview</h2>
+            <p>Modern cameras often struggle to capture the full dynamic range of real-world scenes, resulting in images that may be partially underexposed or overexposed. To address this, both photographers and researchers commonly merge data from multiple exposures of the same scene. In this project, you will develop software that automatically combines these multiple exposures into a single high dynamic range (HDR) radiance map and applies tone mapping to convert this map into a displayable image.
+                This project is based on the <a href="https://www.pauldebevec.com/Research/HDR/debevec-siggraph97.pdf"> Debevec and Malik 1997</a> paper.
+            </p>
+        </section>
+        <section>
+            <h2>Input Images</h2>
+            <p>We start with images taken at various exposures of a stationary scene, an example shown below.</p>
+            <section class="image-section">
+                <div class="image-card">
+                    <img src="media/1_25.jpg" alt="" />
+                    <p>1/25 sec</p>
+                </div>
+                <div class="image-card">
+                  <img src="media/1_4.jpg" alt="" />
+                  <p>1/4 sec</p>
+                </div>
+                <div class="image-card">
+                    <img src="media/3_1.jpg" alt="" />
+                    <p>3 sec</p>
+                </div>
+                <div class="image-card">
+                    <img src="media/17_1.jpg" alt="" />
+                    <p>17 sec</p>
+                </div>
+            </section>
+        </section>
+        <section>
+            <h2>Radiance Map Construction</h2>
+                <p>
+                    The observed pixel value, <i>Z<sub>ij</sub></i>, for pixel <i>i</i> in image <i>j</i> is a function of the unknown scene radiance and the known exposure duration: 
+                    <i>Z<sub>ij</sub> = f(E<sub>i</sub> Δt<sub>j</sub>)</i>. Here, <i>E<sub>i</sub></i> represents the unknown scene radiance at pixel <i>i</i>, and 
+                    <i>E<sub>i</sub> Δt<sub>j</sub></i> denotes the exposure at that pixel. The function <i>f</i> represents the camera's pixel response curve, which is often non-linear.
+                </p>
+                <p>
+                    Instead of solving directly for <i>f</i>, we solve for <i>g = ln(f<sup>-1</sup>)</i>, which maps pixel values (0–255) to the logarithm of exposure values. The relationship can be expressed as: 
+                    <i>g(Z<sub>ij</sub>) = ln(E<sub>i</sub>) + ln(Δt<sub>j</sub>)</i> (Equation 2, Debevec). Since the scene is static, while we may not know the absolute radiance value <i>E<sub>i</sub></i>, it remains constant across all exposures of the same pixel.
+                </p>
+                <p>
+                    To make the results more robust:
+                    <ul>
+                    <li>
+                        <b>Ensure smoothness:</b> A penalty is added to the linear system for large second derivatives of <i>g</i>. The second derivative is approximated as 
+                        <i>g(x-1) + g(x+1) - 2g(x)</i>, applied across all pixel values except at the boundaries (<i>g(0)</i> and <i>g(255)</i>).
+                    </li>
+                    <li>
+                        <b>Use pixel weighting:</b> Each exposure contributes reliable information only for well-exposed pixels. Weighting is applied according to 
+                        Equation 6 in Debevec, using a triangle function that peaks at <i>Z = 127.5</i> and is zero at <i>Z = 0</i> and <i>Z = 255</i>.
+                    </li>
+                    </ul>
+                </p>
+                <section class="image-section">
+                    <div class="image-card">
+                        <img src="media/garage_g_plot.png" alt="" />
+                        <p></p>
+                    </div>
+                </section>
+                <p>
+                    Once <i>g</i> is solved, radiance values can be calculated using: <i>ln(E<sub>i</sub>) = g(Z<sub>ij</sub>) - ln(Δt<sub>j</sub>)</i> (Equation 5, Debevec).
+                </p>
+                <section class="image-section">
+                    <div class="image-card">
+                        <img src="media/garage_hdr_radiance_map_mean.png" alt="" />
+                        <p>Mean radiance map</p>
+                    </div>
+                    <div class="image-card">
+                        <img src="media/garage_hdr_radiance_map.png" alt="" />
+                        <p>Per channel radiance map</p>
+                    </div>
+                </section>
+        </section>
+        <section>
+            <h2>Tone Mapping</h2>
+                <p>
+                    Once the radiance map is generated, tone mapping is used to compress its dynamic range for display. 
+                    We implemented both global and local tone mapping techniques:
+                </p>
+                <h3>Global Tone Mapping</h3>
+                <p>
+                    The global method applies a simple compression formula:
+                    <code>E_display = E_world / (1 + E_world)</code>. This effectively reduces high-intensity values 
+                    while maintaining overall contrast. The result is normalized to the [0, 1] range for display.
+                </p>
+                <h3>Local Tone Mapping</h3>
+                <p>
+                    For a more sophisticated approach, we implemented a simplified version of Durand 2002:
+                </p>
+                <ol>
+                    <li>Compute intensity as the average of the RGB channels.</li>
+                    <li>Extract chrominance as <code>R/I, G/I, B/I</code>.</li>
+                    <li>Transform intensity to log space and filter it using a bilateral filter to obtain a base layer.</li>
+                    <li>Calculate a detail layer as the difference between the log intensity and the base layer.</li>
+                    <li>Apply scaling and offset to the base layer to control dynamic range compression.</li>
+                    <li>Reconstruct the intensity by combining the scaled base and detail layers.</li>
+                    <li>Restore the color by multiplying the intensity with the chrominance and apply gamma compression for display.</li>
+                </ol>
+                <p>
+                    The combination of these methods allows for effective visualization of high dynamic range images 
+                    while preserving local details and contrast.
+                </p>
+                <section class="image-section">
+                    <div class="image-card">
+                        <img src="media/garage_global_scale.png" alt="" />
+                        <p>Global Scaling</p>
+                    </div>
+                    <div class="image-card">
+                        <img src="media/garage_global_simple.png" alt="" />
+                        <p>Global Simple</p>
+                    </div>
+                    <div class="image-card">
+                        <img src="media/garage_durand.png" alt="" />
+                        <p>Durand</p>
+                    </div>
+                </section>
+                <p>
+                    Although the difference between the three tone mapping algorithms is not super strong, you can see that the simple scale fails to reduce contrast and some details are lost in the dark. The global simple method is an improvement but it still has some saturation in the darkest and lightest parts of the image. The Durand however remedies this and overall looks quite good.
+                </p>
+        </section>
+        <section>
+            <h2>All HDR Images</h2>
+            <p>Below are the results for the arch, bonsai, chapel, gatrage, garden, house, mug, and window for both global simple and Durand tone mapping.</p>
+            <section class="image-section">
+                <div class="image-card">
+                    <img src="media/garage_global_simple.png" alt="" />
+                    <p>Global Simple</p>
+                </div>
+                <div class="image-card">
+                    <img src="media/garage_durand.png" alt="" />
+                    <p>Durand</p>
+                </div>
+            </section>
+            <section class="image-section">
+                <div class="image-card">
+                    <img src="media/house_global_simple.png" alt="" />
+                    <p>Global Simple</p>
+                </div>
+                <div class="image-card">
+                    <img src="media/house_durand.png" alt="" />
+                    <p>Durand</p>
+                </div>
+            </section>
+            <section class="image-section">
+                <div class="image-card">
+                    <img src="media/chapel_global_simple.png" alt="" />
+                    <p>Global Simple</p>
+                </div>
+                <div class="image-card">
+                    <img src="media/chapel_durand.png" alt="" />
+                    <p>Durand</p>
+                </div>
+            </section>
+            <section class="image-section">
+                <div class="image-card">
+                    <img src="media/arch_global_simple.png" alt="" />
+                    <p>Global Simple</p>
+                </div>
+                <div class="image-card">
+                    <img src="media/arch_durand.png" alt="" />
+                    <p>Durand</p>
+                </div>
+            </section>
+            <section class="image-section">
+                <div class="image-card">
+                    <img src="media/garden_global_simple.png" alt="" />
+                    <p>Global Simple</p>
+                </div>
+                <div class="image-card">
+                    <img src="media/garden_durand.png" alt="" />
+                    <p>Durand</p>
+                </div>
+            </section>
+            <section class="image-section">
+                <div class="image-card">
+                    <img src="media/window_global_simple.png" alt="" />
+                    <p>Global Simple</p>
+                </div>
+                <div class="image-card">
+                    <img src="media/window_durand.png" alt="" />
+                    <p>Durand</p>
+                </div>
+            </section>
+            <section class="image-section">
+                <div class="image-card">
+                    <img src="media/mug_global_simple.png" alt="" />
+                    <p>Global Simple</p>
+                </div>
+                <div class="image-card">
+                    <img src="media/mug_durand.png" alt="" />
+                    <p>Durand</p>
+                </div>
+            </section>
         </section>
     </div>
   </body>

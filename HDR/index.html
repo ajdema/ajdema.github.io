@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fun with Filters and Frequencies!</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+      header {
+        background-color: #333;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+      }
+      .container {
+        max-width: 1000px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        color: #333;
+      }
+      p {
+        line-height: 1.6;
+      }
+      .image-section {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-top: 20px;
+      }
+      .image-card {
+        flex: 1;
+        min-width: 200px;
+        max-width: 300px;
+        text-align: center;
+      }
+      .image-card img {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      .image-card p {
+        margin-top: 10px;
+      }
+      .row-images {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: nowrap;
+        width: 100%;
+        overflow-x: auto;
+        }
+
+        .row-images .image-card {
+        flex: 1;
+        text-align: center;
+        }
+
+        .row-images .image-card img {
+        width: 100px; /* Set smaller width only for these specific images */
+        height: auto;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        }
+      .two-column {
+        display: flex;
+        flex-wrap: wrap; /* Ensures responsiveness */
+        gap: 20px; /* Adds some space between the columns */
+        margin-top: 20px;
+      }
+
+      .text-column {
+        flex: 1;
+        min-width: 200px;
+      }
+
+      .image-column {
+        flex: 1;
+        min-width: 200px;
+        text-align: center;
+      }
+
+      .image-column img {
+        max-width: 100%;
+        height: auto;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      .video-container {
+      text-align: center;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+    }
+    p {
+      margin: 10px 0 0;
+      font-size: 1rem;
+      color: #333;
+    }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Texture Pyramid!</h1>
+    </header>
+    <div class="container">
+      <section>
+        <h2>Project Overview</h2>
+        <p>TODO</p>
+      </section>
+      <section>
+        <h2>Overview of Oriented Filters</h2>
+        <p>
+            Oriented filters are specifically designed to capture directional features in an image, such as edges and textures, along particular orientations. 
+            These filters are essential for applications like texture analysis and edge detection, where the orientation of features carries significant information. In this context, the oriented filterrs are 
+            used to decompose an image into multiple oriented bands. Each badn emphasizes image details aligned with a specific angle. The filters I used are shown below.
+        </p>
+        <section class="row-images">
+            <div class="image-card">
+              <img src="media/filter_type_0.jpg" alt="" />
+              <p>Filter 0</p>
+            </div>
+            <div class="image-card">
+              <img src="media/filter_type_1.jpg" alt="" />
+              <p>Filter 1</p>
+            </div>
+            <div class="image-card">
+                <img src="media/filter_type_2.jpg" alt="" />
+                <p>Filter 2</p>
+            </div>
+            <div class="image-card">
+                <img src="media/filter_type_3.jpg" alt="" />
+                <p>Filter 3</p>
+            </div>
+            <div class="image-card">
+                <img src="media/filter_type_4.jpg" alt="" />
+                <p>Filter 4</p>
+            </div>
+            <div class="image-card">
+                <img src="media/filter_type_5.jpg" alt="" />
+                <p>Filter 5</p>
+            </div>
+          </section>
+          <p>
+            A Laplacian bandpass filter isolates features within a specific frequency range by subtracting two successive levels of a Gaussian pyramid. This process results in a bandpass filter that emphasizes edges and texture details while suppressing uniform regions.
+
+            For a given frequency band, the sum of all oriented filters is mathematically equivalent to the Laplacian bandpass filter. This equivalence arises because the oriented filters collectively cover all possible directions in the image, reconstructing the complete bandpass information. Below are some results showing how the summing the result of filtering an image with all of the oriented filters is the same as the laplacian bandpass filter.
+          </p>
+          <section class="image-section">
+            <div class="image-card">
+                <img src="media/input_grey_fabric.png" alt="" />
+                <p>Input image of Gray Fabric</p>
+            </div>
+            <div class="image-card">
+                <img src="media/fabric_laplacian_band_1.png" alt="" />
+                <p>Laplacian Pyramid of Gray Fabric</p>
+            </div>
+            <div class="image-card">
+                <img src="media/summed_grey_fabric.jpg" alt="" />
+                <p>Summed oriented filters of Gray Fabric</p>
+            </div>
+          </section>
+          <section class="row-images">
+            <div class="image-card">
+                <img src="media/grey_fabric_filtered_0.jpg" alt="" />
+                <p>Gray Fabric with filter 0</p>
+            </div>
+            <div class="image-card">
+                <img src="media/grey_fabric_filtered_1.jpg" alt="" />
+                <p>Gray Fabric with filter 1</p>
+            </div>
+            <div class="image-card">
+                <img src="media/grey_fabric_filtered_2.jpg" alt="" />
+                <p>Gray Fabric with filter 2</p>
+            </div>
+            <div class="image-card">
+                <img src="media/grey_fabric_filtered_3.jpg" alt="" />
+                <p>Gray Fabric with filter 3</p>
+            </div>
+            <div class="image-card">
+                <img src="media/grey_fabric_filtered_4.jpg" alt="" />
+                <p>Gray Fabric with filter 4</p>
+            </div>
+            <div class="image-card">
+                <img src="media/grey_fabric_filtered_5.jpg" alt="" />
+                <p>Gray Fabric with filter 5</p>
+            </div>
+          </section>
+          <section class="image-section">
+            <div class="image-card">
+                <img src="media/input_wood.png" alt="" />
+                <p>Input image of wood</p>
+            </div>
+            <div class="image-card">
+                <img src="media/laplacian_stack_wood_1.png" alt="" />
+                <p>Laplacian Pyramid of wood</p>
+            </div>
+            <div class="image-card">
+                <img src="media/summed_wood.jpg" alt="" />
+                <p>Summed oriented filters of wood</p>
+            </div>
+          </section>
+          <section class="image-section">
+            <div class="image-card">
+                <img src="media/input_brick.png" alt="" />
+                <p>Input image of brick</p>
+            </div>
+            <div class="image-card">
+                <img src="media/laplacian_stack_brick_1.png" alt="" />
+                <p>Laplacian Pyramid of brick</p>
+            </div>
+            <div class="image-card">
+                <img src="media/summed_brick.jpg" alt="" />
+                <p>Summed oriented filters of wood</p>
+            </div>
+          </section>
+      </section>
+      <section>
+        <h2>Keypoints with known 3D world coordinates</h2>
+          <p>
+            The first step is to extract the first frame from the video and annotate some keypoints for that image, I chose to annotate 32 keypoints in the end.
+            Next, you need to define 3D cooridinates for those same points. Since I drew a grid with 2 inch spacing on my box, I was easily able to define 3D coordinates for each of my 2D keypoints.
+            Now that we have 2D keypoints for the first frame we need to propogate those for each frame in the video. <br/>
+            To do this I used <b>cv2.calcOpticalFlowPyrLK</b> which is Optical Flow with the Lucas-Kanade method for feature point tracking. It computes the motion of a list of points between two frames by using local gradients of pixel intensities to get the displacement. There were some points that it struggled to properly track which gave weird results, so I simply removed those points from my projection matrix calculation.
+          </p>
+        <div class="video-container">
+        <img src="media/output_video_with_tracking.gif" alt="Tracking GIF">
+        <p>Tracking all points</p>
+        </div>
+        <div class="video-container">
+        <img src="media/output_video_with_tracking3.gif" alt="Tracking GIF">
+        <p>Tracking removed bad points</p>
+    </div>
+      </section>
+        <section>
+            <h2>Calibrating the Camera</h2>
+    <p>
+        Now that we have the 2D points for each frame in the video, we can calibrate the camera by finding a projection matrix that maps the 3D coordinates of points in the world to their corresponding 2D image coordinates. The process involves solving for the camera's projection matrix using the least squares method, which minimizes the error between the predicted and actual 2D points.
+    </p>
+    <p>
+        To do this, we need to solve the equation:
+        <br>
+        <strong>p = P * X</strong>
+        <br>
+        where <strong>p</strong> is the 2D point in homogeneous coordinates (x, y, 1), <strong>P</strong> is the 3x4 camera projection matrix, and <strong>X</strong> is the 3D point in homogeneous coordinates (X, Y, Z, 1). The goal is to find <strong>P</strong> that best maps the 3D points to the corresponding 2D points across all frames.
+    </p>
+    <p>
+        The matrix equation can be rewritten for multiple points as:
+        <br>
+        <strong>[p₁] [x₁ y₁ z₁ 1] </strong><br>
+        <strong>[p₂] [x₂ y₂ z₂ 1]</strong><br>
+        <strong>[p₃] [x₃ y₃ z₃ 1]</strong><br>
+        <strong>...   ...   ...   ...</strong><br>
+        <strong> [pₖ] [xₖ yₖ zₖ 1]</strong><br>
+        </p>
+        <p>
+        We can solve this system of equations using a least squares approach, where we minimize the sum of squared differences between the actual and predicted 2D points. The resulting matrix <strong>P</strong> consists of the intrinsic and extrinsic parameters of the camera, which include the camera's focal length, principal point, and orientation in space.
+        </p>
+    </p>
+    </section>
+        <section>
+            <h2>Projecting a cube in the Scene</h2>
+            <p>Now that we have a projection matrix for each frame, we just use it to project the 3D coordinates of our cube onto that 2D frame and then draw the cube onto the frame. </p>
+            <div class="video-container">
+                <img src="media/output_video_with_cube3.gif" alt="Output GIF">
+                <p>Output Video with Cube</p>
+            </div>
+        </section>
+    </div>
+  </body>
+</html>
