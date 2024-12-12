@@ -398,48 +398,56 @@
                 Bells and Whistles!
             </h2>
             <p> For Bells and whistles I chose to try HDR on my own images using my iphone camera. I don't have a tripod so I setup some books to hold my phone in place while leavign room for me to adjust the exposure between shots. Unfortunately even the tiny movements from adjusting the exposure and tapping to take the photo messed up the alignment a noticeable amount between images. Nonetheless you can see how the HDR worked below.</p>
+            <section class="image-section">
+                <div class="image-card">
+                    <img src="media/1_120.jpg" alt="" />
+                    <p>Input 1/120 sec</p>
+                </div>
+                <div class="image-card">
+                    <img src="media/1_60.jpg" alt="" />
+                    <p>Input 1/60 sec</p>
+                </div>
+                <div class="image-card">
+                    <img src="media/1_40 2.jpg" alt="" />
+                    <p>Input 1/40 sec</p>
+                </div>
+                <div class="image-card">
+                    <img src="media/1_30.jpg" alt="" />
+                    <p>Input 1/30 sec</p>
+                </div>
+            </section>
+            <section class="image-section">
+                <div class="image-card">
+                    <img src="media/photo_hdr_radiance_map_mean.png" alt="" />
+                    <p>Radiance map mean</p>
+                </div>
+                <div class="image-card">
+                    <img src="media/photo_hdr_radiance_map.png" alt="" />
+                    <p>Radiance map per channel</p>
+                </div>
+            </section>
+            <section class="image-section">
+                <div class="image-card">
+                    <img src="media/photo_global_scale.png" alt="" />
+                    <p>Global Scale</p>
+                </div>
+                <div class="image-card">
+                    <img src="media/photo_global_simple.png" alt="" />
+                    <p>Global Simple</p>
+                </div>
+                <div class="image-card">
+                    <img src="media/photo_durand.png" alt="" />
+                    <p>Durand</p>
+                </div>
+            </section>
         </section>
-        <section class="image-section">
-            <div class="image-card">
-                <img src="media/1_120.jpg" alt="" />
-                <p>Input 1/120 sec</p>
-            </div>
-            <div class="image-card">
-                <img src="media/1_60.jpg" alt="" />
-                <p>Input 1/60 sec</p>
-            </div>
-            <div class="image-card">
-                <img src="media/1_40 2.jpg" alt="" />
-                <p>Input 1/40 sec</p>
-            </div>
-            <div class="image-card">
-                <img src="media/1_30.jpg" alt="" />
-                <p>Input 1/30 sec</p>
-            </div>
-        </section>
-        <section class="image-section">
-            <div class="image-card">
-                <img src="media/photo_hdr_radiance_map_mean.png" alt="" />
-                <p>Radiance map mean</p>
-            </div>
-            <div class="image-card">
-                <img src="media/photo_hdr_radiance_map.png" alt="" />
-                <p>Radiance map per channel</p>
-            </div>
-        </section>
-        <section class="image-section">
-            <div class="image-card">
-                <img src="media/photo_global_scale.png" alt="" />
-                <p>Global Scale</p>
-            </div>
-            <div class="image-card">
-                <img src="media/photo_global_simple.png" alt="" />
-                <p>Global Simple</p>
-            </div>
-            <div class="image-card">
-                <img src="media/photo_durand.png" alt="" />
-                <p>Durand</p>
-            </div>
+        <section>
+            <h2>Conclusion</h2>
+            <p>While my tone mapping implementation produces visually appealing results in many cases, I recognize that some of my results look unusual, particularly in areas with very bright or directly lit elements. These regions often appear overly bright or washed out, detracting from the overall image quality.
+
+                To address this issue, I explored several potential solutions, including adjusting the dynamic range compression parameters, refining the gamma correction values, and experimenting with different scaling and offset techniques for the base layer in the Durand method. I also attempted to apply localized intensity adjustments to mitigate overexposure in particularly bright areas. Unfortunately, while these approaches improved certain aspects of the results, they did not completely resolve the issue across all test images.
+                
+                This outcome highlights the challenge of balancing brightness and detail preservation in HDR tone mapping, especially in high-dynamic-range scenes. Overall I had a fun time with this project and enjoyed readeing the Debevec paper.</p>
         </section>
     </div>
   </body>
