@@ -244,7 +244,7 @@
                 </p>
                 <section class="image-section">
                     <div class="image-card">
-                        <img src="media/garage_g_plot.png" alt="" />
+                        <img src="media/arch_g_plot.png" alt="" />
                         <p></p>
                     </div>
                 </section>
@@ -253,11 +253,11 @@
                 </p>
                 <section class="image-section">
                     <div class="image-card">
-                        <img src="media/garage_hdr_radiance_map_mean.png" alt="" />
+                        <img src="media/arch_hdr_radiance_map_mean.png" alt="" />
                         <p>Mean radiance map</p>
                     </div>
                     <div class="image-card">
-                        <img src="media/garage_hdr_radiance_map.png" alt="" />
+                        <img src="media/arch_hdr_radiance_map.png" alt="" />
                         <p>Per channel radiance map</p>
                     </div>
                 </section>
@@ -293,15 +293,15 @@
                 </p>
                 <section class="image-section">
                     <div class="image-card">
-                        <img src="media/garage_global_scale.png" alt="" />
+                        <img src="media/arch_global_scale.png" alt="" />
                         <p>Global Scaling</p>
                     </div>
                     <div class="image-card">
-                        <img src="media/garage_global_simple.png" alt="" />
+                        <img src="media/arch_global_simple.png" alt="" />
                         <p>Global Simple</p>
                     </div>
                     <div class="image-card">
-                        <img src="media/garage_durand.png" alt="" />
+                        <img src="media/arch_durand.png" alt="" />
                         <p>Durand</p>
                     </div>
                 </section>
@@ -311,14 +311,14 @@
         </section>
         <section>
             <h2>All HDR Images</h2>
-            <p>Below are the results for the arch, bonsai, chapel, gatrage, garden, house, mug, and window for both global simple and Durand tone mapping.</p>
+            <p>Below are the results for the arch, house, chapel, garage, garden, window, mug, and bonsai for both global simple and Durand tone mapping.</p>
             <section class="image-section">
                 <div class="image-card">
-                    <img src="media/garage_global_simple.png" alt="" />
+                    <img src="media/arch_global_simple.png" alt="" />
                     <p>Global Simple</p>
                 </div>
                 <div class="image-card">
-                    <img src="media/garage_durand.png" alt="" />
+                    <img src="media/arch_durand.png" alt="" />
                     <p>Durand</p>
                 </div>
             </section>
@@ -344,11 +344,11 @@
             </section>
             <section class="image-section">
                 <div class="image-card">
-                    <img src="media/arch_global_simple.png" alt="" />
+                    <img src="media/garage_global_simple.png" alt="" />
                     <p>Global Simple</p>
                 </div>
                 <div class="image-card">
-                    <img src="media/arch_durand.png" alt="" />
+                    <img src="media/garage_durand.png" alt="" />
                     <p>Durand</p>
                 </div>
             </section>
@@ -443,11 +443,7 @@
         </section>
         <section>
             <h2>Conclusion</h2>
-            <p>While my tone mapping implementation produces visually appealing results in many cases, I recognize that some of my results look unusual, particularly in areas with very bright or directly lit elements. These regions often appear overly bright or washed out, detracting from the overall image quality.
-
-                To address this issue, I explored several potential solutions, including adjusting the dynamic range compression parameters, refining the gamma correction values, and experimenting with different scaling and offset techniques for the base layer in the Durand method. I also attempted to apply localized intensity adjustments to mitigate overexposure in particularly bright areas. Unfortunately, while these approaches improved certain aspects of the results, they did not completely resolve the issue across all test images.
-                
-                This outcome highlights the challenge of balancing brightness and detail preservation in HDR tone mapping, especially in high-dynamic-range scenes. Overall I had a fun time with this project and enjoyed readeing the Debevec paper.</p>
+            <p>This project was quite visually appealing to see my results get better as I debugged. A main challenge in this project was reconstructing the hdr map which took my three implementations before getting solid results. Overall I really enjoyed seeing the results of this project and reading the Debevec paper.</p>
         </section>
     </div>
   </body>
